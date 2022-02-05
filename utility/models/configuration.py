@@ -38,7 +38,6 @@ class Configuration(BaseModel):
 
     class Meta:
         # Define the database table
-        db_table = 'configuration'
         ordering = ['group', 'name']
         verbose_name = 'Configuration'
         verbose_name_plural = 'Configurations'
