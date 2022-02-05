@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
+    'workhours.apps.WorkhoursConfig',
     'utility.apps.UtilityConfig',
     'django.contrib.admin',
     'django.contrib.auth',
