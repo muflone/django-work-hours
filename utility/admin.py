@@ -25,7 +25,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy
 
-from .models import User
+from .models import Configuration, ConfigurationAdmin, User
 
 
 class UserCreationForm(forms.ModelForm):
@@ -126,4 +126,5 @@ class CustomUserAdmin(UserAdmin):
 
 
 # Models registration
+admin.site.register(Configuration, ConfigurationAdmin)
 admin.site.register(User, CustomUserAdmin)

@@ -19,4 +19,5 @@
 ##
 
 from .base_model import BaseModel                                  # noqa: F401
+from .configuration import Configuration, ConfigurationAdmin       # noqa: F401
 from .user import User                                             # noqa: F401
