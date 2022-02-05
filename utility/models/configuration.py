@@ -19,6 +19,7 @@
 ##
 
 from django.db import models
+from django.utils.translation import pgettext_lazy
 
 from .base_model import BaseModel, BaseModelAdmin
 
@@ -39,8 +40,10 @@ class Configuration(BaseModel):
     class Meta:
         # Define the database table
         ordering = ['group', 'name']
-        verbose_name = 'Configuration'
-        verbose_name_plural = 'Configurations'
+        verbose_name = pgettext_lazy('Configuration',
+                                     'Configuration')
+        verbose_name_plural = pgettext_lazy('Configuration',
+                                            'Configurations')
 
     def __str__(self):
         return self.name
