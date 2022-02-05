@@ -18,26 +18,15 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from django.urls import path
+from django.views.generic import TemplateView
 
-from .views import DashboardView, HomeView
-from .views.auth import LoginView, LogoutView
+from utility.mixins import RequireLoginMixin
+
+from workhours.mixins.team import TeamMixin
 
 
-urlpatterns = []
-# Home page
-urlpatterns.append(path(route='',
-                        view=HomeView.as_view(),
-                        name='workhours.home'))
-# Login page
-urlpatterns.append(path(route='login',
-                        view=LoginView.as_view(),
-                        name='workhours.auth.login'))
-# Logout page
-urlpatterns.append(path(route='logout',
-                        view=LogoutView.as_view(),
-                        name='workhours.auth.logout'))
-# Dashboard page
-urlpatterns.append(path(route='dashboard',
-                        view=DashboardView.as_view(),
-                        name='workhours.dashboard'))
+class DashboardView(RequireLoginMixin,
+                    TeamMixin,
+                    TemplateView):
+    template_name = 'workhours/dashboard.html'
+    page_title = 'My dashboard'

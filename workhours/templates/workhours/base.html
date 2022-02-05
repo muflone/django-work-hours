@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+{% block header_begin %}
+    <!-- Header begin -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="product" content="{{ app_name }} {{ app_version }}">
+{% endblock %}
+
+{% block header_title %}
+    <title>{{ page_title }}</title>
+{% endblock %}
+
+{% block header_css %}
+    {% include 'workhours/includes/bootstrap.html' with type='css' %}
+    <link rel="stylesheet" href="{% static 'workhours/feather/css/feather.css' %}">
+    {% include 'workhours/includes/theme.html' with type='css' %}
+    <!-- Custom styles -->
+{% endblock %}
+
+{% block header_js %}
+    <!-- Custom scripts -->
+{% endblock %}
+
+{% block header_end %}
+    <!-- Header end -->
+{% endblock %}
+  </head>
+  <body>
+{% block body_begin %}
+    <!-- Body begin -->
+    <nav class="navbar navbar-expand-lg navbar-light" id="topnav">
+      <div class="container">
+        <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <a class="mr-auto mr-lg-5 order-lg-first text-primary text-bold h2 mb-0"
+          href="{% url 'workhours.home' %}">Django Work Hours</a>
+        <div class="navbar-user">
+          <div class="dropdown">
+            <a href="#" class="avatar avatar-sm dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="avatar-title rounded-circle" title="{{ user.get_full_name }}">{{ user.get_initials }}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="#" class="dropdown-item">Your account</a>
+              <hr class="dropdown-divider">
+              <a href="{% url 'workhours.auth.logout' %}" class="dropdown-item">Logout</a>
+            </div>
+          </div>
+        </div>
+        <div class="collapse navbar-collapse mr-auto order-lg-first" id="navbar">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item mr-3">
+              <a class="nav-link{% if request.resolver_match.url_name == 'workhours.dashboard' %} active{% endif %}" role="button"
+                 href="{% url 'workhours.dashboard' %}">Dashboard</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="container mt-3 mb-5">
+        <div class="header">
+          <div class="header-body">
+  {% block body_header1 %}
+            <!-- Header 1 -->
+            <div class="row align-items-center">
+              <div class="col">
+                <h1 class="header-title">{{ page_title }}</h1>
+              </div>
+            </div>
+  {% endblock %}
+  {% block body_header2 %}
+            <!-- Header 2 -->
+  {% endblock %}
+          </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+    <!-- Content -->
+{% endblock %}
+
+{% block feedback %}
+    <!-- Feedback -->
+{% endblock %}
+
+{% block footer_css %}
+    <!-- Footer CSS -->
+{% endblock %}
+
+{% block footer_js %}
+    <!-- Footer JS -->
+    {% include 'workhours/includes/jquery.html' with type='js' %}
+    {% include 'workhours/includes/bootstrap.html' with type='js' %}
+{% endblock %}
+
+{% block footer_end %}
+      </div>
+    </div>
+    <!-- Footer end -->
+{% endblock %}
+
+{% block body_end %}
+    <!-- Body end -->
+{% endblock %}
+  </body>
+</html>

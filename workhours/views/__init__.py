@@ -18,4 +18,5 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+from .dashboard import DashboardView                               # noqa: F401
 from .home import HomeView                                         # noqa: F401
