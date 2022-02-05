@@ -23,7 +23,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView as DjangoLoginView
 from django.urls import reverse_lazy
 
-from utility.views import GenericMixin
+from utility.mixins import GenericMixin
 
 
 class LoginForm(AuthenticationForm):

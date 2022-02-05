@@ -21,7 +21,7 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LogoutView as DjangoLogoutView
 
-from utility.views import GenericMixin
+from utility.mixins import GenericMixin
 
 
 class LogoutView(GenericMixin,
