@@ -20,8 +20,10 @@
 
 from django.contrib import admin
 
-from .models import Employee, EmployeeAdmin
+from .models import (Employee, EmployeeAdmin,
+                     Team, TeamAdmin)
 
 
 # Models registration
 admin.site.register(Employee, EmployeeAdmin)
+admin.site.register(Team, TeamAdmin)
