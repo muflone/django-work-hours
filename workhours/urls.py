@@ -20,10 +20,15 @@
 
 from django.urls import path
 
+from .views import HomeView
 from .views.auth import LoginView, LogoutView
 
 
 urlpatterns = []
+# Home page
+urlpatterns.append(path(route='',
+                        view=HomeView.as_view(),
+                        name='workhours.home'))
 # Login page
 urlpatterns.append(path(route='login',
                         view=LoginView.as_view(),
