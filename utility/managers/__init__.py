@@ -19,3 +19,4 @@
 ##
 
 from .is_active import ManagerIsActive                             # noqa: F401
+from .user import ManagerUser                                      # noqa: F401

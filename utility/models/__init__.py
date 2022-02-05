@@ -19,3 +19,4 @@
 ##
 
 from .base_model import BaseModel                                  # noqa: F401
+from .user import User                                             # noqa: F401

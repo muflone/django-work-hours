@@ -108,3 +108,6 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Define the custom user model
+AUTH_USER_MODEL = 'utility.User'
