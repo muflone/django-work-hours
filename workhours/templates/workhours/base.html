@@ -54,6 +54,12 @@
               <a class="nav-link{% if request.resolver_match.url_name == 'workhours.dashboard' %} active{% endif %}" role="button"
                  href="{% url 'workhours.dashboard' %}">Dashboard</a>
             </li>
+{% for team in teams %}
+            <li class="nav-item mr-3">
+              <a class="nav-link{% if request.resolver_match.url_name == 'workhours.team' and object.pk == team.pk %} active{% endif %}" role="button"
+                 href="{% url 'workhours.team' pk=team.pk %}">{{ team.name }}</a>
+            </li>
+{% endfor %}
           </ul>
         </div>
       </div>

@@ -1,0 +1,52 @@
+{% extends 'workhours/base.html' %}
+{% load static %}
+
+{% block content %}
+  {% for week in weeks %}
+      <div id="accordion">
+        <div class="card">
+          <h2 class="card-header">
+            <div>
+              <a class="card-link" data-toggle="collapse" href="#collapse-{{ week.0 }}">
+    {% if week.1.is_closed %}
+                <span class="fe fe-check-circle"></span>
+    {% else %}
+                <span class="fe fe-x-circle"></span>
+    {% endif %}
+                  Week from {{ week.1.starting_date | date:date_format_short }}
+                  to {{ week.1.ending_date | date:date_format_short }}
+              </a>
+            </div>
+          </h2>
+          <div id="collapse-{{ week.0 }}" class="collapse{% if week.0 == 0 %} show{% endif %}">
+            <div class="card-body">
+              <div class="form-group row">
+                <div class="col-sm-2">From</div>
+                <div class="col-sm-10">{{ week.1.starting_date | date:date_format_short }}</div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">To</div>
+                <div class="col-sm-10">{{ week.1.ending_date | date:date_format_short }}</div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">Status</div>
+                <div class="col-sm-10">
+    {% if week.1.is_closed %}
+                  Closed - No modifications are possible
+    {% else %}
+                  Open - You can change the data
+    {% endif %}
+                </div>
+              </div>
+    {% if week.1.notes %}
+              <div class="form-group row">
+                <div class="col-sm-2">Notes</div>
+                <div class="col-sm-10">{{ week.1.notes }}</div>
+              </div>
+    {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+{% endblock %}

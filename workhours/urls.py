@@ -20,7 +20,7 @@
 
 from django.urls import path
 
-from .views import DashboardView, HomeView
+from .views import DashboardView, HomeView, TeamView
 from .views.auth import LoginView, LogoutView
 
 
@@ -41,3 +41,8 @@ urlpatterns.append(path(route='logout',
 urlpatterns.append(path(route='dashboard',
                         view=DashboardView.as_view(),
                         name='workhours.dashboard'))
+# Team page
+urlpatterns.append(path(route='team/'
+                              '<int:pk>',
+                        view=TeamView.as_view(),
+                        name='workhours.team'))
