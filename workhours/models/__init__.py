@@ -20,3 +20,4 @@
 
 from .employee import Employee, EmployeeAdmin                      # noqa: F401
 from .team import Team, TeamAdmin                                  # noqa: F401
+from .week import Week, WeekAdmin                                  # noqa: F401

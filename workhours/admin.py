@@ -21,9 +21,11 @@
 from django.contrib import admin
 
 from .models import (Employee, EmployeeAdmin,
-                     Team, TeamAdmin)
+                     Team, TeamAdmin,
+                     Week, WeekAdmin)
 
 
 # Models registration
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Team, TeamAdmin)
+admin.site.register(Week, WeekAdmin)
