@@ -18,17 +18,12 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from django.urls import path
+from django.urls import reverse_lazy
+from django.contrib.auth.views import LogoutView as DjangoLogoutView
 
-from .views.auth import LoginView, LogoutView
+from utility.views import GenericMixin
 
 
-urlpatterns = []
-# Login page
-urlpatterns.append(path(route='login',
-                        view=LoginView.as_view(),
-                        name='workhours.auth.login'))
-# Logout page
-urlpatterns.append(path(route='logout',
-                        view=LogoutView.as_view(),
-                        name='workhours.auth.logout'))
+class LogoutView(GenericMixin,
+                 DjangoLogoutView):
+    next_page = reverse_lazy('workhours.auth.login')
