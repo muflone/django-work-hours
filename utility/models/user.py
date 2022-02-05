@@ -44,7 +44,7 @@ class User(BaseModel,
     username = None
     # Set the user manager
     objects = ManagerUser()
-    objects_enabled = ManagerIsActive()
+    objects_active = ManagerIsActive()
     # Set properties
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
