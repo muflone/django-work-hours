@@ -9,9 +9,9 @@
             <div>
               <a class="card-link" data-toggle="collapse" href="#collapse-{{ week.0 }}">
     {% if week.1.is_closed %}
-                <span class="fe fe-check-circle"></span>
+                <span class="fe fe-lock"></span>
     {% else %}
-                <span class="fe fe-x-circle"></span>
+                <span class="fe fe-check-circle"></span>
     {% endif %}
                   Week from {{ week.1.starting_date | date:date_format_short }}
                   to {{ week.1.ending_date | date:date_format_short }}
