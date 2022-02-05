@@ -18,5 +18,12 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .generic import GenericMixin                                  # noqa: F401
-from .require_login import RequireLoginMixin                       # noqa: F401
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+
+
+class RequireLoginMixin(LoginRequiredMixin):
+    """
+    Require user login
+    """
+    login_url = reverse_lazy('workhours.auth.login')
