@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+  {% if not object.is_closed %}
       <!-- Modal dialog -->
       <div class="modal fade" id="modal-dialog" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -26,6 +27,7 @@
           </div>
         </div>
       </div>
+  {% endif %}
   {% for day in days %}
       <!-- Accordion for day {{ day.0 }} -->
       <div id="accordion">
@@ -36,8 +38,10 @@
                   {{ day.1 | date:date_format_full }}
               </a>
             </span>
+    {% if not object.is_closed %}
             <input class="btn btn-primary save-button" type="button" value="Save daily data"
               id="save-{{ shift.pk }}" data-shifts="{{ day.3 }}" data-toggle="modal" data-target="#modal-dialog">
+    {% endif %}
           </h2>
           <div id="collapse-{{ day.0 }}" class="collapse show">
             <div class="card-body">
@@ -79,6 +83,7 @@
 
 {% block footer_js %}
   {{ block.super }}
+  {% if not object.is_closed %}
     <script>
       // Save week results
       $(".save-button").click(function() {
@@ -126,4 +131,5 @@
         $('#modal-dialog').modal('hide');
       });
     </script>
+  {% endif %}
 {% endblock %}}
