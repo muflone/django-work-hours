@@ -19,7 +19,9 @@
 ##
 
 from django import forms
-from django.http import HttpResponseServerError, JsonResponse
+from django.http import (HttpResponseForbidden,
+                         HttpResponseServerError,
+                         JsonResponse)
 from django.views.generic import UpdateView
 
 from utility.mixins import RequireLoginMixin
@@ -47,10 +49,14 @@ class ShiftUpdateView(RequireLoginMixin,
         form = super().get_form(form_class=self.form_class)
         if form.is_valid():
             shift = Shift.objects.get(pk=form.cleaned_data['pk'])
-            shift.is_present = form.cleaned_data.get('present', False)
-            shift.is_holiday = form.cleaned_data.get('holiday', False)
-            shift.permit_hours = form.cleaned_data.get('permit', 0)
-            shift.save()
-            return JsonResponse({'code': 200})
+            if not shift.week.is_closed:
+                shift.is_present = form.cleaned_data.get('present', False)
+                shift.is_holiday = form.cleaned_data.get('holiday', False)
+                shift.permit_hours = form.cleaned_data.get('permit', 0)
+                shift.save()
+                return JsonResponse({'code': 200})
+            else:
+                # The week is closed, unable to update
+                return HttpResponseForbidden()
         else:
             return HttpResponseServerError()
