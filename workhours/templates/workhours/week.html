@@ -16,6 +16,7 @@
                 <span class="sr-only">Loading...</span>
               </div>
               <h4 id="modal-step-title" class="mt-1 mb-4"></h4>
+              <h4 id="modal-result" class="mt-1 mb-4"></h4>
               <div class="progress progress-sm">
                 <div id="modal-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                   aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
@@ -83,16 +84,17 @@
       $(".save-button").click(function() {
         $("#modal-progress-bar").css("width", "0%");
         $("#modal-dialog").modal('show');
+        $("#modal-result").text("");
         let shifts_ids = $(this).data("shifts");
         let step_size_percent = 1 / shifts_ids.length * 100;
         let step_width = 0;
-        let update_status = true;
         // Loop over each shift
-        shifts_ids.forEach(function (shift_id) {
+        shifts_ids.every(function (shift_id) {
           let employee = $("#employee-" + shift_id).text();
           let is_present = $("#present-" + shift_id).prop("checked");
           let is_holiday = $("#holiday-" + shift_id).prop("checked");
           let permit = $("#permit-" + shift_id).val();
+          let update_status = false;
           console.log(shift_id, employee, is_present, is_holiday, permit);
           step_width += step_size_percent;
           $("#modal-progress-bar").css("width", step_width + "%");
@@ -111,12 +113,15 @@
               async: false,
               success: function () {
                 console.log('success');
+                update_status = true;
               },
               error: function () {
                 console.log('fail');
-                update_status = false;
+                $("#modal-result").text("unable to update");
               }
           });
+          // Returning true the every() method processes the next iteration
+          return update_status;
         });
         $('#modal-dialog').modal('hide');
       });
