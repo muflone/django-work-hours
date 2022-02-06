@@ -55,4 +55,5 @@ class Shift(BaseModel):
 class ShiftAdmin(BaseModelAdmin):
     list_display = ('date', 'week', 'employee',
                     'is_present', 'is_holiday', 'permit_hours')
-    list_filter = ('employee', )
+    list_filter = ('week__team', 'employee', 'week__is_closed',
+                   'is_present', 'is_holiday')

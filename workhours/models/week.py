@@ -55,4 +55,4 @@ class Week(BaseModel):
 
 class WeekAdmin(BaseModelAdmin):
     list_display = ('starting_date', 'ending_date', 'team')
-    list_filter = ('team', )
+    list_filter = ('team', 'is_closed')
