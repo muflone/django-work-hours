@@ -17,6 +17,12 @@
                   to {{ week.1.ending_date | date:date_format_short }}
               </a>
             </div>
+            <div>
+              <a class="card-link" href="{% url 'workhours.week' pk=week.1.pk %}">
+                Show details
+                <span class="fe fe-grid"></span>
+              </a>
+            </div>
           </h2>
           <div id="collapse-{{ week.0 }}" class="collapse{% if week.0 == 0 %} show{% endif %}">
             <div class="card-body">

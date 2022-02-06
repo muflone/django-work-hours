@@ -48,3 +48,30 @@ input[type=checkbox].selection_mode {
 .header-tabs .nav-link {
     padding-bottom: 0.5rem;
 }
+
+.card-row {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.card-row-header {
+    background-color: #ececec;
+    font-weight: bold;
+    font-size: large;
+}
+
+.card-row-alternate {
+    background-color: #ececec;
+}
+
+.shift-employee-name {
+    font-size: large;
+}
+
+.zoom-x12 {
+    transform: scale(1.2);
+}
+
+.zoom-x15 {
+    transform: scale(1.5);
+}

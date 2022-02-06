@@ -59,6 +59,12 @@
               <a class="nav-link{% if request.resolver_match.url_name == 'workhours.team' and object.pk == team.pk %} active{% endif %}" role="button"
                  href="{% url 'workhours.team' pk=team.pk %}">{{ team.name }}</a>
             </li>
+  {# Add Week detail header #}
+  {% if request.resolver_match.url_name == 'workhours.week' and object.team_id == team.pk %}
+            <li class="nav-item mr-3">
+              <a class="nav-link active" role="button">Week details</a>
+            </li>
+  {% endif %}
 {% endfor %}
           </ul>
         </div>

@@ -1,0 +1,48 @@
+{% extends 'workhours/base.html' %}
+{% load static %}
+
+{% block content %}
+  {% for day in days %}
+      <div id="accordion">
+        <div class="card">
+          <h2 class="card-header">
+            <div>
+              <a class="card-link" data-toggle="collapse" href="#collapse-{{ day.0 }}">
+                  {{ day.1 | date:date_format_full }}
+              </a>
+            </div>
+          </h2>
+          <div id="collapse-{{ day.0 }}" class="collapse">
+            <div class="card-body">
+              <div class="row card-row card-row-header">
+                <div class="col-sm-3">Name</div>
+                <div class="col-sm-2">Present</div>
+                <div class="col-sm-2">On holiday</div>
+                <div class="col-sm-2">Permit hours</div>
+              </div>
+    {% for shift in day.2 %}
+              <div class="row card-row {% if forloop.counter|divisibleby:2 %}card-row-alternate{% endif %}">
+                <div class="col-sm-3 shift-employee-name">{{ shift.employee }}</div>
+                <div class="col-sm-2">
+                  <label>
+                    <input class="zoom-x15" type="checkbox"{% if shift.is_present %} checked{% endif %}>
+                    &nbsp;&nbsp;Present
+                  </label>
+                </div>
+                <div class="col-sm-2">
+                  <label>
+                    <input class="zoom-x15" type="checkbox"{% if shift.is_holyday %} checked{% endif %}>
+                    &nbsp;&nbsp;Holyday
+                  </label>
+                </div>
+                <div class="col-sm-2">
+                  <input class="zoom-x12" type="number" min="0" max="8" size="4" value="{{ shift.permit_hours }}">
+                </div>
+              </div>
+    {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+{% endblock %}
