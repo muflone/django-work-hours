@@ -17,10 +17,6 @@
     color: black;
 }
 
-.ql-editor {
-    height: 200px !important;
-}
-
 .modal-sm {
     max-width: 400px;
 }
@@ -42,7 +38,7 @@ input[type=checkbox].selection_mode {
 }
 
 .header-tabs {
-    margin-bottom: 0rem;
+    margin-bottom: 0;
 }
 
 .header-tabs .nav-link {

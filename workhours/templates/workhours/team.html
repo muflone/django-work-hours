@@ -6,7 +6,7 @@
       <div id="accordion">
         <div class="card">
           <h2 class="card-header">
-            <div>
+            <span>
               <a class="card-link" data-toggle="collapse" href="#collapse-{{ week.0 }}">
     {% if week.1.is_closed %}
                 <span class="fe fe-lock"></span>
@@ -16,13 +16,13 @@
                   Week from {{ week.1.starting_date | date:date_format_short }}
                   to {{ week.1.ending_date | date:date_format_short }}
               </a>
-            </div>
-            <div>
+            </span>
+            <span>
               <a class="card-link" href="{% url 'workhours.week' pk=week.1.pk %}">
                 Show details
                 <span class="fe fe-grid"></span>
               </a>
-            </div>
+            </span>
           </h2>
           <div id="collapse-{{ week.0 }}" class="collapse{% if week.0 == 0 %} show{% endif %}">
             <div class="card-body">

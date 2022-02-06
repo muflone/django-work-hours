@@ -43,7 +43,7 @@ class HomeView(RedirectView):
                 if (page.startswith('/') or
                         page.startswith('http:') or
                         page.startswith('https:')):
-                    # Use full complete URL
+                    # Use complete URL
                     url = page
                 else:
                     # Use route with arguments and parameters
