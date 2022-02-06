@@ -17,7 +17,7 @@
               <div class="row card-row card-row-header">
                 <div class="col-sm-3">Name</div>
                 <div class="col-sm-2">Present</div>
-                <div class="col-sm-2">On holiday</div>
+                <div class="col-sm-2">Holiday</div>
                 <div class="col-sm-2">Permit hours</div>
               </div>
     {% for shift in day.2 %}
@@ -31,8 +31,8 @@
                 </div>
                 <div class="col-sm-2">
                   <label>
-                    <input class="zoom-x15" type="checkbox"{% if shift.is_holyday %} checked{% endif %}>
-                    &nbsp;&nbsp;Holyday
+                    <input class="zoom-x15" type="checkbox"{% if shift.is_holiday %} checked{% endif %}>
+                    &nbsp;&nbsp;Holiday
                   </label>
                 </div>
                 <div class="col-sm-2">

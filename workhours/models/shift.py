@@ -34,7 +34,7 @@ class Shift(BaseModel):
                                  on_delete=models.PROTECT)
     date = models.DateField(null=False)
     is_present = models.BooleanField(default=False)
-    is_holyday = models.BooleanField(default=False)
+    is_holiday = models.BooleanField(default=False)
     permit_hours = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
@@ -54,5 +54,5 @@ class Shift(BaseModel):
 
 class ShiftAdmin(BaseModelAdmin):
     list_display = ('date', 'week', 'employee',
-                    'is_present', 'is_holyday', 'permit_hours')
+                    'is_present', 'is_holiday', 'permit_hours')
     list_filter = ('employee', )
