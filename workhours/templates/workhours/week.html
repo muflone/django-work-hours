@@ -1,6 +1,11 @@
 {% extends 'workhours/base.html' %}
 {% load static %}
 
+{% block body_header1_pre_title %}
+                  <!-- Pre title -->
+                  <a href="{% url 'workhours.team' pk=object.team_id %}"><span class="fe fe-chevron-left"></span></a>
+{% endblock %}
+
 {% block content %}
       <!-- Modal dialog -->
       <div class="modal fade" id="modal-dialog" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
