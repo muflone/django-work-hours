@@ -54,11 +54,13 @@ class WeekView(RequireLoginMixin,
             day = (self.object.starting_date +
                    datetime.timedelta(days=day_number))
             shifts = []
+            shifts_ids = []
             for employee in employees:
                 shift, _ = Shift.objects.get_or_create(week=self.object,
                                                        employee=employee,
                                                        date=day)
                 shifts.append(shift)
-            days.append((day_number, day, shifts))
+                shifts_ids.append(shift.pk)
+            days.append((day_number, day, shifts, shifts_ids))
         context['days'] = days
         return context
