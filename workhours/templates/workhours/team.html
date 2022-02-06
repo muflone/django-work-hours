@@ -7,7 +7,8 @@
         <div class="card">
           <h2 class="card-header">
             <span>
-              <a class="card-link" data-toggle="collapse" href="#collapse-{{ week.0 }}">
+              <a class="card-link" data-toggle="collapse" href="#collapse-{{ week.0 }}"
+                aria-expanded="{% if week.0 == 0 %}true{% else %}false{% endif %}">
     {% if week.1.is_closed %}
                 <span class="fe fe-lock"></span>
     {% else %}
@@ -18,7 +19,7 @@
               </a>
             </span>
             <span>
-              <a class="card-link" href="{% url 'workhours.week' pk=week.1.pk %}">
+              <a href="{% url 'workhours.week' pk=week.1.pk %}">
                 Show details
                 <span class="fe fe-grid"></span>
               </a>

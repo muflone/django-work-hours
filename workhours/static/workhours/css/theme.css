@@ -71,3 +71,13 @@ input[type=checkbox].selection_mode {
 .zoom-x15 {
     transform: scale(1.5);
 }
+
+.card-link::before {
+    content: "\e92e";
+    font-family: 'Feather' !important;
+}
+
+.card-link[aria-expanded="true"]::before {
+    content: "\e931";
+    font-family: 'Feather' !important;
+}
