@@ -38,7 +38,7 @@
             </a>
           </span>
     {% if not object.is_closed %}
-          <input class="btn btn-primary save-button" type="button" value="Save daily data"
+          <input class="btn btn-primary save-daily" type="button" value="Save daily data"
             id="save-{{ shift.pk }}" data-shifts="{{ day.3 }}" data-toggle="modal" data-target="#modal-dialog">
     {% endif %}
         </h2>
@@ -85,7 +85,7 @@
   {% if not object.is_closed %}
     <script>
       // Save daily results
-      $(".save-button").click(function() {
+      $(".save-daily").click(function() {
         let data = $(this).data("shifts");
         update_shifts(data);
       });
