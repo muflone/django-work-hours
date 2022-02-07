@@ -35,7 +35,7 @@ class GenericMixin(ContextMixin,
         'date_format_short':  get_configuration_value(name='date_format_short',
                                                       default='Y/m/d'),
         'date_format_full': get_configuration_value(name='date_format_full',
-                                                    default='Y/m/d h:i:s'),
+                                                    default='l Y/m/d'),
     }
 
     def get_context_data(self, **kwargs):
