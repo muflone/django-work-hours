@@ -50,10 +50,20 @@ class TeamView(RequireLoginMixin,
                              datetime.timedelta(days=today.weekday(),
                                                 weeks=week_number))
             ending_date = starting_date + datetime.timedelta(days=6)
-            week, _ = Week.objects.get_or_create(team_id=self.object.pk,
-                                                 starting_date=starting_date,
-                                                 ending_date=ending_date,
-                                                 defaults={'is_closed': True})
-            weeks.append((week_number, week))
+            if week_number > 0:
+                # Get a previous week if it exists
+                week = Week.objects.filter(team_id=self.object.pk,
+                                           starting_date=starting_date,
+                                           ending_date=ending_date).first()
+            else:
+                # Create the current week if it's missing
+                week, _ = Week.objects.get_or_create(
+                    team_id=self.object.pk,
+                    starting_date=starting_date,
+                    ending_date=ending_date,
+                    defaults={'is_closed': False})
+            # Add a week if it was created or found
+            if week:
+                weeks.append((week_number, week))
         context['weeks'] = weeks
         return context
