@@ -39,8 +39,7 @@
           </span>
     {% if not object.is_closed %}
           <input class="btn btn-primary save-button" type="button" value="Save daily data"
-            id="save-{{ shift.pk }}" data-shifts="{{ day.3 }}" data-toggle="modal" data-target="#modal-dialog"
-            data-date="{{ day.1 | date:date_format_full }}">
+            id="save-{{ shift.pk }}" data-shifts="{{ day.3 }}" data-toggle="modal" data-target="#modal-dialog">
     {% endif %}
         </h2>
         <div id="collapse-{{ day.0 }}" class="collapse show">
@@ -53,7 +52,8 @@
             </div>
     {% for shift in day.2 %}
             <div class="row card-row {% if forloop.counter|divisibleby:2 %}card-row-alternate{% endif %}">
-              <div class="col-sm-3 shift-employee-name" id="employee-{{ shift.pk }}">{{ shift.employee }}</div>
+              <div class="col-sm-3 shift-employee-name" id="employee-{{ shift.pk }}"
+                data-date="{{ day.1 | date:date_format_full }}">{{ shift.employee }}</div>
               <div class="col-sm-2">
                 <label>
                   <input class="zoom-x15" type="checkbox"{% if shift.is_present %} checked{% endif %}
@@ -86,23 +86,28 @@
     <script>
       // Save daily results
       $(".save-button").click(function() {
+        let data = $(this).data("shifts");
+        update_shifts(data);
+      });
+      // Update data using the modal dialog
+      function update_shifts(data) {
         $("#modal-progress-bar").css("width", "0%");
         $("#modal-dialog").modal('show');
-        $("#modal-result").text("Saving data for " + $(this).data("date"));
-        let shifts_ids = $(this).data("shifts");
-        let step_size_percent = 1 / shifts_ids.length * 100;
+        let step_size_percent = 1 / data.length * 100;
         let step_width = 0;
         // Loop over each shift
-        shifts_ids.every(function (shift_id) {
+        data.every(function (shift_id) {
           let employee = $("#employee-" + shift_id).text();
+          let date = $("#employee-" + shift_id).data("date");
           let is_present = $("#present-" + shift_id).prop("checked");
           let is_holiday = $("#holiday-" + shift_id).prop("checked");
           let permit = $("#permit-" + shift_id).val();
           let update_status = false;
-          console.log(shift_id, employee, is_present, is_holiday, permit);
+          console.log(shift_id, employee, date, is_present, is_holiday, permit);
           step_width += step_size_percent;
           $("#modal-step-title").text(employee);
           $("#modal-progress-bar").css("width", step_width + "%");
+          $("#modal-result").text("Saving data for " + date);
           $.ajax({
               method: "POST",
               dataType: "json",
@@ -128,7 +133,7 @@
           return update_status;
         });
         $('#modal-dialog').modal('hide');
-      });
+      }
     </script>
   {% endif %}
 {% endblock %}}
