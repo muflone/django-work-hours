@@ -25,6 +25,7 @@ from django.views.generic import DetailView
 from utility.extras import get_configuration_value
 from utility.mixins import RequireLoginMixin
 
+from workhours.constants import WEEKS_TO_LIST
 from workhours.mixins import TeamMixin
 from workhours.models import Team, Week
 
@@ -41,10 +42,10 @@ class TeamView(RequireLoginMixin,
         context['page_title'] = self.object.name
         # Get the previous weeks
         weeks = []
-        weeks_to_show = int(get_configuration_value(name='weeks_to_show',
+        weeks_to_list = int(get_configuration_value(name=WEEKS_TO_LIST,
                                                     default='5'))
         today = datetime.date.today()
-        for week_number in range(weeks_to_show):
+        for week_number in range(weeks_to_list):
             starting_date = (today -
                              datetime.timedelta(days=today.weekday(),
                                                 weeks=week_number))
