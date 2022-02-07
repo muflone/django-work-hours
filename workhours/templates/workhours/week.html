@@ -39,7 +39,8 @@
           </span>
     {% if not object.is_closed %}
           <input class="btn btn-primary save-button" type="button" value="Save daily data"
-            id="save-{{ shift.pk }}" data-shifts="{{ day.3 }}" data-toggle="modal" data-target="#modal-dialog">
+            id="save-{{ shift.pk }}" data-shifts="{{ day.3 }}" data-toggle="modal" data-target="#modal-dialog"
+            data-date="{{ day.1 | date:date_format_full }}">
     {% endif %}
         </h2>
         <div id="collapse-{{ day.0 }}" class="collapse show">
@@ -87,7 +88,7 @@
       $(".save-button").click(function() {
         $("#modal-progress-bar").css("width", "0%");
         $("#modal-dialog").modal('show');
-        $("#modal-result").text("");
+        $("#modal-result").text("Saving data for " + $(this).data("date"));
         let shifts_ids = $(this).data("shifts");
         let step_size_percent = 1 / shifts_ids.length * 100;
         let step_width = 0;
