@@ -28,6 +28,45 @@
         </div>
       </div>
   {% endif %}
+      <!-- Week details -->
+      <div class="card">
+        <h2 class="card-header">
+          <span>
+            <a class="card-link" data-toggle="collapse" href="#collapse-week" aria-expanded="true">
+                Week details
+            </a>
+          </span>
+  {% if not object.is_closed %}
+          <input class="btn btn-danger save-weekly" type="button" value="Save all data"
+            id="week-save" data-toggle="modal" data-target="#modal-dialog">
+  {% endif %}
+        </h2>
+        <div id="collapse-week" class="collapse show">
+          <div class="card-body">
+            <div class="row card-row">
+              <div class="col-sm-1">Status</div>
+              <div class="col-sm-9">
+  {% if object.is_closed %}
+                <span class="fe fe-lock"></span>
+  {% else %}
+                <span class="fe fe-check-circle"></span>
+  {% endif %}
+                {{ object.is_closed | yesno:"Closed,Open" }}
+              </div>
+            </div>
+            <div class="row card-row">
+              <div class="col-sm-1"><label for="notes">Notes</label></div>
+  {% if not object.is_closed %}
+              <div class="col-sm">
+                <input type="text" id="notes" name="notes" value="{{ object.notes }}" class="form-control">
+              </div>
+  {% else %}
+              <div class="col-sm-9">{{ object.notes }}</div>
+  {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
   {% for day in days %}
       <!-- Accordion for day {{ day.0 }} -->
       <div class="card">
@@ -87,6 +126,14 @@
       // Save daily results
       $(".save-daily").click(function() {
         let data = $(this).data("shifts");
+        update_shifts(data);
+      });
+      // Save weekly results
+      $(".save-weekly").click(function() {
+        let data = [];
+        $(".save-daily").each(function (index, object) {
+          data = data.concat($(object).data("shifts"));
+        });
         update_shifts(data);
       });
       // Update data using the modal dialog
