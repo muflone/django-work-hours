@@ -50,13 +50,14 @@ class WeekView(RequireLoginMixin,
         employees = team.employees.order_by('first_name', 'last_name')
         # Get the days details
         days = []
+        shifts_all_qs = Shift.objects.select_related('employee')
         for day_number in range(7):
             day = (self.object.starting_date +
                    datetime.timedelta(days=day_number))
             shifts = []
             shifts_ids = []
             for employee in employees:
-                shift, _ = Shift.objects.get_or_create(week=self.object,
+                shift, _ = shifts_all_qs.get_or_create(week=self.object,
                                                        employee=employee,
                                                        date=day)
                 shifts.append(shift)
