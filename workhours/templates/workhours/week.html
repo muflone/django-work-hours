@@ -179,7 +179,7 @@
           $.ajax({
               method: "POST",
               dataType: "json",
-              url: "{% url 'workhours.shift' %}",
+              url: "{% url 'workhours.shift_update' %}",
               data: {
                 pk: shift_id,
                 present: is_present,

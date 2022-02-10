@@ -52,6 +52,6 @@ urlpatterns.append(path(route='week/'
                         view=WeekView.as_view(),
                         name='workhours.week'))
 # Shift update page
-urlpatterns.append(path(route='shift',
+urlpatterns.append(path(route='shift_update',
                         view=ShiftUpdateView.as_view(),
-                        name='workhours.shift'))
+                        name='workhours.shift_update'))
