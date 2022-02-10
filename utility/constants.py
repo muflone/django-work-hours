@@ -18,5 +18,9 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+ADMIN_SITE_HEADER = 'admin.site_header'
+ADMIN_SITE_TITLE = 'admin.site_title'
+ADMIN_INDEX_TITLE = 'admin.index_title'
+
 DATE_FORMAT_SHORT = 'date_format_short'
 DATE_FORMAT_FULL = 'date_format_full'
