@@ -23,3 +23,4 @@ from .home import HomeView                                         # noqa: F401
 from .shift_update import ShiftUpdateForm, ShiftUpdateView         # noqa: F401
 from .team import TeamView                                         # noqa: F401
 from .week import WeekView                                         # noqa: F401
+from .week_update import WeekUpdateForm, WeekUpdateView            # noqa: F401

@@ -156,6 +156,7 @@
           data = data.concat($(object).data("shifts"));
         });
         update_shifts(data);
+        update_week();
       });
       // Update data using the modal dialog
       function update_shifts(data) {
@@ -201,6 +202,30 @@
           return update_status;
         });
         $('#modal-dialog').modal('hide');
+      }
+      // Update and close week
+      function update_week() {
+          let week_id = {{ object.pk}};
+          let notes = $("#notes").val();
+          $.ajax({
+              method: "POST",
+              dataType: "json",
+              url: "{% url 'workhours.week_update' %}",
+              data: {
+                pk: week_id,
+                notes: notes,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+              },
+              async: false,
+              success: function () {
+                console.log('success');
+                location.replace("{% url 'workhours.team' pk=object.team_id %}");
+              },
+              error: function () {
+                console.log('fail');
+                $("#modal-result").text("Unable to update");
+              }
+          });
       }
     </script>
   {% endif %}

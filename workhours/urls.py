@@ -20,7 +20,12 @@
 
 from django.urls import path
 
-from .views import DashboardView, HomeView, ShiftUpdateView, TeamView, WeekView
+from .views import (DashboardView,
+                    HomeView,
+                    ShiftUpdateView,
+                    TeamView,
+                    WeekUpdateView,
+                    WeekView)
 from .views.auth import LoginView, LogoutView
 
 
@@ -55,3 +60,7 @@ urlpatterns.append(path(route='week/'
 urlpatterns.append(path(route='shift_update',
                         view=ShiftUpdateView.as_view(),
                         name='workhours.shift_update'))
+# Week update page
+urlpatterns.append(path(route='week_update',
+                        view=WeekUpdateView.as_view(),
+                        name='workhours.week_update'))
