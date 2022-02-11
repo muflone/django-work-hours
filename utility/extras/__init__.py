@@ -18,4 +18,5 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .get_configuration_value import get_configuration_value       # noqa: F401
+from .get_configuration_value import (get_configuration_int,       # noqa: F401
+                                      get_configuration_value)     # noqa: F401
