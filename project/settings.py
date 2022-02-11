@@ -26,7 +26,7 @@ SECRET_KEY = 'DEFINE YOUR SECRET KEY'
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
