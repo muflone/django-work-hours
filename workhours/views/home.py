@@ -53,7 +53,9 @@ class HomeView(RedirectView):
                     if '/' in page:
                         page, *args = page.split('/')
                     querystring = query or ''
-                    url = f'{reverse_lazy(page, args=args)}?{querystring}'
+                    url = '{PAGE}{QUERYSTRING}'.format(
+                        PAGE=reverse_lazy(page, args=args),
+                        QUERYSTRING=f'?{querystring}' if querystring else '')
             else:
                 url = reverse_lazy('workhours.dashboard')
         return url
