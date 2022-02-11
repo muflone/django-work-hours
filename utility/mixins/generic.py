@@ -23,8 +23,11 @@ from django.views.generic.base import ContextMixin
 
 from project import PRODUCT_NAME, VERSION
 
-from utility.constants import DATE_FORMAT_FULL, DATE_FORMAT_SHORT, SITE_TITLE
-from utility.extras import get_configuration_value
+from utility.constants import (DATE_FORMAT_FULL,
+                               DATE_FORMAT_SHORT,
+                               SITE_HIDE_DASHBOARD,
+                               SITE_TITLE)
+from utility.extras import get_configuration_bool, get_configuration_value
 
 
 class GenericMixin(ContextMixin,
@@ -37,6 +40,8 @@ class GenericMixin(ContextMixin,
                                                       default='Y/m/d'),
         'date_format_full': get_configuration_value(name=DATE_FORMAT_FULL,
                                                     default='l Y/m/d'),
+        'site_hide_dashboard': get_configuration_bool(name=SITE_HIDE_DASHBOARD,
+                                                      default=False),
         'site_title': get_configuration_value(name=SITE_TITLE,
                                               default=PRODUCT_NAME),
     }

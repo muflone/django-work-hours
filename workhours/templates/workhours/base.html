@@ -50,10 +50,12 @@
         </div>
         <div class="collapse navbar-collapse mr-auto order-lg-first" id="navbar">
           <ul class="navbar-nav mr-auto">
+{% if not site_hide_dashboard %}
             <li class="nav-item mr-3">
               <a class="nav-link{% if request.resolver_match.url_name == 'workhours.dashboard' %} active{% endif %}" role="button"
                  href="{% url 'workhours.dashboard' %}">Dashboard</a>
             </li>
+{% endif %}
 {% for team in teams %}
             <li class="nav-item mr-3">
               <a class="nav-link{% if request.resolver_match.url_name == 'workhours.team' and object.pk == team.pk %} active{% endif %}" role="button"
