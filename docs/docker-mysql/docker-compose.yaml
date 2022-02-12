@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  web:
+    container_name: django-work-hours-mysql_web
+    image: nginx:1.21.3-alpine
+    ports:
+      - 8000:8000/tcp
+    depends_on:
+      - backend
+    volumes:
+      - ./static:/static
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./logs:/var/log/nginx
+
+  backend:
+    container_name: django-work-hours-mysql_backend
+    image: ilmuflone/django-work-hours:0.2.0-mysql
+    env_file:
+      - ./database.env
+    environment:
+      - SERVER_PORT=8080
+    expose:
+      - 8080
+    depends_on:
+      - database
+    volumes:
+      - ./static:/app/static
+      - ./settings_container.py:/app/project/settings_container.py
+
+  database:
+    container_name: django-work-hours-mysql_db
+    image: mysql:5
+    env_file:
+      - ./database.env
+      - ./database_root.env
+    volumes:
+      - ./db:/var/lib/mysql
+
