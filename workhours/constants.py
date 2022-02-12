@@ -18,4 +18,6 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+DELAY_AFTER_SAVE_SHIFT = 'delay_after_save_shift'
+
 WEEKS_TO_LIST = 'weeks_to_list'
