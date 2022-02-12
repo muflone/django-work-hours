@@ -23,8 +23,10 @@ import datetime
 from django.utils.dateformat import format as format_date
 from django.views.generic import DetailView
 
+from utility.extras import get_configuration_int
 from utility.mixins import RequireLoginMixin
 
+from workhours.constants import DELAY_AFTER_SAVE_DAY
 from workhours.mixins import TeamMixin
 from workhours.models import Team, Shift, Week
 
@@ -45,6 +47,10 @@ class WeekView(RequireLoginMixin,
                                           format_string=date_format),
                 ENDING_DATE=format_date(value=self.object.ending_date,
                                         format_string=date_format)))
+        context['delay_after_save_day'] = get_configuration_int(
+            name=DELAY_AFTER_SAVE_DAY,
+            default=0
+        )
         # Get the team employees
         team = Team.objects_active.get(pk=self.object.team_id)
         employees = team.employees.order_by('first_name', 'last_name')

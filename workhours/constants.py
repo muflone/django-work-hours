@@ -19,5 +19,6 @@
 ##
 
 DELAY_AFTER_SAVE_SHIFT = 'delay_after_save_shift'
+DELAY_AFTER_SAVE_DAY = 'delay_after_save_day'
 
 WEEKS_TO_LIST = 'weeks_to_list'
