@@ -79,7 +79,6 @@ required tables and data using the following command:
 
 ```shell
 python manage.py migrate
-python manage.py migrate --database api_logs
 ```
 
 ## Create a new Administrator account
