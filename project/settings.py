@@ -107,6 +107,9 @@ DATETIME_FORMAT = 'Y-m-d H:i:s'
 DATE_FORMAT = 'Y-m-d'
 TIME_FORMAT = 'H:i:s'
 
+# Administration console URL
+ADMIN_URL = 'admin/'
+
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
