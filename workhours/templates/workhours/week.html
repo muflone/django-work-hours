@@ -158,7 +158,7 @@
         });
         update_shifts(data);
         update_week();
-        hide_dialog();
+        setTimeout(hide_dialog, {{ delay_after_save_week }});
       });
       // Update data using the modal dialog
       function update_shifts(data) {
