@@ -18,14 +18,18 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import time
+
 from django import forms
 from django.http import (HttpResponseForbidden,
                          HttpResponseServerError,
                          JsonResponse)
 from django.views.generic import UpdateView
 
+from utility.extras import get_configuration_int
 from utility.mixins import RequireLoginMixin
 
+from workhours.constants import DELAY_AFTER_SAVE_SHIFT
 from workhours.models import Shift
 
 
@@ -54,6 +58,9 @@ class ShiftUpdateView(RequireLoginMixin,
                 shift.is_holiday = form.cleaned_data.get('holiday', False)
                 shift.permit_hours = form.cleaned_data.get('permit', 0)
                 shift.save()
+                # Apply a delay after saving a shift
+                time.sleep(get_configuration_int(name=DELAY_AFTER_SAVE_SHIFT,
+                                                 default=0) / 1000)
                 return JsonResponse({'code': 200})
             else:
                 # The week is closed, unable to update
