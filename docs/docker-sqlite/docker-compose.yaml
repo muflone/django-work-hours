@@ -23,5 +23,5 @@ services:
     volumes:
       - ./static:/app/static
       - ./database.sqlite3:/var/lib/django-work-hours.sqlite3
-      - ./settings_container.py:/app/project/settings_container.py
+      - ./new_settings_container.py:/app/project/settings_container.py
 

@@ -11,7 +11,7 @@ https://hub.docker.com/repository/docker/ilmuflone/django-work-hours
 You can compose a very simple docker stack using compose.
 
 First prepare a settings file for the container with the name
-**settings_container.py**:
+**new_settings_container.py**:
 
 ```python
 from .settings import *
@@ -81,7 +81,7 @@ services:
     volumes:
       - ./static:/app/static
       - ./database.sqlite3:/var/lib/django-work-hours.sqlite3
-      - ./settings_container.py:/app/project/settings_container.py
+      - ./new_settings_container.py:/app/project/settings_container.py
 ```
 
 - The container `django-work-hours_web` will run nginx to serve the HTTP requests

@@ -11,7 +11,7 @@ https://hub.docker.com/repository/docker/ilmuflone/django-work-hours
 You can compose a very simple docker stack using compose.
 
 First prepare a settings file for the container with the name
-**settings_container.py**:
+**new_settings_container.py**:
 
 ```python
 import os
@@ -105,7 +105,7 @@ services:
       - database
     volumes:
       - ./static:/app/static
-      - ./settings_container.py:/app/project/settings_container.py
+      - ./new_settings_container.py:/app/project/settings_container.py
 
   database:
     container_name: django-work-hours-mysql_db
