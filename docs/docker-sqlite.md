@@ -73,7 +73,7 @@ services:
 
   backend:
     container_name: django-work-hours_backend
-    image: ilmuflone/django-work-hours:0.2.1
+    image: ilmuflone/django-work-hours:0.2.2
     environment:
       - SERVER_PORT=8080
     expose:
