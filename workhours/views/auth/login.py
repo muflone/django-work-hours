@@ -32,7 +32,8 @@ class LoginForm(AuthenticationForm):
         required=True,
         widget=forms.EmailInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Your email address'
+            'placeholder': 'Your email address',
+            'autofocus': True
         }))
     password = forms.CharField(
         label='Password',
