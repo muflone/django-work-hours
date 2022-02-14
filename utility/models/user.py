@@ -57,7 +57,7 @@ class User(BaseModel,
         verbose_name_plural = 'Users'
 
     def __str__(self):
-        return self.email
+        return f'{self.get_full_name()} <{self.email}>'
 
     def get_initials(self):
         """User initials"""
