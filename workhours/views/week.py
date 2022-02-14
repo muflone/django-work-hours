@@ -27,12 +27,13 @@ from utility.extras import get_configuration_int
 from utility.mixins import RequireLoginMixin
 
 from workhours.constants import DELAY_AFTER_SAVE_DAY, DELAY_AFTER_SAVE_WEEK
-from workhours.mixins import TeamMixin
+from workhours.mixins import IsInTeamUserMixin, TeamMixin
 from workhours.models import Team, Shift, Week
 
 
 class WeekView(RequireLoginMixin,
                TeamMixin,
+               IsInTeamUserMixin,
                DetailView):
     model = Week
     template_name = 'workhours/week.html'

@@ -18,4 +18,5 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+from .is_in_team import IsInTeamUserMixin                          # noqa: F401
 from .team import TeamMixin                                        # noqa: F401

@@ -26,12 +26,13 @@ from utility.extras import get_configuration_int
 from utility.mixins import RequireLoginMixin
 
 from workhours.constants import WEEKS_TO_LIST
-from workhours.mixins import TeamMixin
+from workhours.mixins import IsInTeamUserMixin, TeamMixin
 from workhours.models import Team, Week
 
 
 class TeamView(RequireLoginMixin,
                TeamMixin,
+               IsInTeamUserMixin,
                DetailView):
     model = Team
     template_name = 'workhours/team.html'

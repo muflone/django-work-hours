@@ -30,6 +30,7 @@ from utility.extras import get_configuration_int
 from utility.mixins import RequireLoginMixin
 
 from workhours.constants import DELAY_AFTER_SAVE_SHIFT
+from workhours.mixins import IsInTeamUserMixin
 from workhours.models import Shift
 
 
@@ -45,6 +46,7 @@ class ShiftUpdateForm(forms.ModelForm):
 
 
 class ShiftUpdateView(RequireLoginMixin,
+                      IsInTeamUserMixin,
                       UpdateView):
     model = Shift
     form_class = ShiftUpdateForm
