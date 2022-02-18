@@ -217,7 +217,7 @@
           $.ajax({
               method: "POST",
               dataType: "json",
-              url: "{% url 'workhours.week_update' %}",
+              url: "{% url 'workhours.week_close' %}",
               data: {
                 pk: week_id,
                 notes: notes,

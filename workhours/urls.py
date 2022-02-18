@@ -24,7 +24,7 @@ from .views import (DashboardView,
                     HomeView,
                     ShiftUpdateView,
                     TeamView,
-                    WeekUpdateView,
+                    WeekCloseView,
                     WeekView)
 from .views.auth import LoginView, LogoutView
 
@@ -61,6 +61,6 @@ urlpatterns.append(path(route='shift_update',
                         view=ShiftUpdateView.as_view(),
                         name='workhours.shift_update'))
 # Week update page
-urlpatterns.append(path(route='week_update',
-                        view=WeekUpdateView.as_view(),
-                        name='workhours.week_update'))
+urlpatterns.append(path(route='week_close',
+                        view=WeekCloseView.as_view(),
+                        name='workhours.week_close'))

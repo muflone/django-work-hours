@@ -39,9 +39,9 @@ class WeekUpdateForm(forms.ModelForm):
         fields = ('pk', 'notes')
 
 
-class WeekUpdateView(RequireLoginMixin,
-                     IsInTeamUserMixin,
-                     UpdateView):
+class WeekCloseView(RequireLoginMixin,
+                    IsInTeamUserMixin,
+                    UpdateView):
     model = Week
     form_class = WeekUpdateForm
 
