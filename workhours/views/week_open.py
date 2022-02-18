@@ -18,10 +18,23 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .dashboard import DashboardView                               # noqa: F401
-from .home import HomeView                                         # noqa: F401
-from .shift_update import ShiftUpdateForm, ShiftUpdateView         # noqa: F401
-from .team import TeamView                                         # noqa: F401
-from .week import WeekView                                         # noqa: F401
-from .week_close import WeekCloseForm, WeekCloseView               # noqa: F401
-from .week_open import WeekOpenView                                # noqa: F401
+from django.http import JsonResponse
+from django.views.generic import DetailView
+
+from utility.mixins import RequireLoginMixin, RequireSuperUserMixin
+
+from workhours.mixins import IsInTeamUserMixin
+from workhours.models import Week
+
+
+class WeekOpenView(RequireLoginMixin,
+                   RequireSuperUserMixin,
+                   IsInTeamUserMixin,
+                   DetailView):
+    model = Week
+
+    def get(self, request, *args, **kwargs):
+        super().get(request, *args, **kwargs)
+        self.object.is_closed = False
+        self.object.save()
+        return JsonResponse({'code': 200})

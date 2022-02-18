@@ -27,6 +27,7 @@
           </div>
         </div>
       </div>
+  {% endif %}
       <!-- Confirmation dialog -->
       <div class="modal fade" id="confirmation-dialog" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -38,16 +39,27 @@
               </button>
             </div>
             <div class="modal-body">
-              <p id="confirmation-dialog-text">Are you sure you want to save the data and close the week?</p>
+              <p id="confirmation-dialog-text">
+  {% if object.is_closed %}
+                  Are you sure you want to reopen the closed week?
+  {% else %}
+                  Are you sure you want to save the data and close the week?
+  {% endif %}
+              </p>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-danger" id="confirmation-dialog-yes">Close the week</button>
+              <button type="submit" class="btn btn-danger" id="confirmation-dialog-yes">
+  {% if object.is_closed %}
+                Open the week
+  {% else %}
+                Close the week
+  {% endif %}
+              </button>
               <button type="button" class="btn btn-primary" id="confirmation-dialog-no" data-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
       </div>
-  {% endif %}
       <!-- Week details -->
       <div class="card">
         <h2 class="card-header">
@@ -59,6 +71,9 @@
   {% if not object.is_closed %}
           <input class="btn btn-danger" type="button" value="Save all data and close the week"
             id="week-save" data-toggle="modal" data-target="#confirmation-dialog">
+  {% elif user.is_superuser %}
+          <input class="btn btn-danger" type="button" value="Reopen the week"
+            id="week-open" data-toggle="modal" data-target="#confirmation-dialog">
   {% endif %}
         </h2>
         <div id="collapse-week" class="collapse show">
@@ -147,8 +162,8 @@
 
 {% block footer_js %}
   {{ block.super }}
-  {% if not object.is_closed %}
     <script>
+  {% if not object.is_closed %}
       // Save daily results
       $(".save-daily").click(function() {
         let data = $(this).data("shifts");
@@ -232,10 +247,30 @@
               }
           });
       }
+  {% endif %}
+  {% if object.is_closed and user.is_superuser %}
+      // Open closed week (confirmation done)
+      $("#confirmation-dialog-yes").click(function() {
+        $("#confirmation-dialog").modal('hide');
+        $.ajax({
+            method: "GET",
+            url: "{% url 'workhours.week.open' pk=object.pk %}",
+            async: false,
+            success: function () {
+              console.log('success');
+              location.replace("{% url 'workhours.week' pk=object.pk %}");
+            },
+            error: function () {
+              console.log('fail');
+              $("#modal-result").text("Unable to update");
+            }
+        });
+        setTimeout(hide_dialog, {{ delay_after_save_week }});
+      });
+  {% endif %}
       // Hide the modal dialog
       function hide_dialog() {
         $('#modal-dialog').modal('hide');
       }
     </script>
-  {% endif %}
 {% endblock %}}
