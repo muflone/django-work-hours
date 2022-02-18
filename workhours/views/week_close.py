@@ -31,12 +31,11 @@ from workhours.models import Week
 
 
 class WeekCloseForm(forms.ModelForm):
-    pk = forms.IntegerField(required=True)
     notes = forms.CharField(required=False)
 
     class Meta:
         model = Week
-        fields = ('pk', 'notes')
+        fields = ('notes', )
 
 
 class WeekCloseView(RequireLoginMixin,
@@ -48,11 +47,11 @@ class WeekCloseView(RequireLoginMixin,
     def post(self, request, *args, **kwargs):
         form = super().get_form(form_class=self.form_class)
         if form.is_valid():
-            week = Week.objects.get(pk=form.cleaned_data['pk'])
-            if not week.is_closed:
-                week.notes = form.cleaned_data.get('notes', '')
-                week.is_closed = True
-                week.save()
+            self.object = self.get_object()
+            if not self.object.is_closed:
+                self.object.notes = form.cleaned_data.get('notes', '')
+                self.object.is_closed = True
+                self.object.save()
                 return JsonResponse({'code': 200})
             else:
                 # The week is closed, unable to update

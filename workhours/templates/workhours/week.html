@@ -212,14 +212,12 @@
       }
       // Update and close week
       function update_week() {
-          let week_id = {{ object.pk}};
           let notes = $("#notes").val();
           $.ajax({
               method: "POST",
               dataType: "json",
-              url: "{% url 'workhours.week_close' %}",
+              url: "{% url 'workhours.week.close' pk=object.pk %}",
               data: {
-                pk: week_id,
                 notes: notes,
                 csrfmiddlewaretoken: '{{ csrf_token }}'
               },
