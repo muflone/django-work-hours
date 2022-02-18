@@ -94,7 +94,7 @@ services:
 
   backend:
     container_name: django-work-hours-mysql_backend
-    image: ilmuflone/django-work-hours:0.2.2-mysql
+    image: ilmuflone/django-work-hours:0.2.3-mysql
     env_file:
       - ./database.env
     environment:
