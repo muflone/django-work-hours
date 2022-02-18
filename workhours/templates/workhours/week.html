@@ -115,20 +115,26 @@
                 data-date="{{ day.1 | date:date_format_full }}">{{ shift.employee }}</div>
               <div class="col-sm-2">
                 <label>
-                  <input class="zoom-x15" type="checkbox"{% if shift.is_present %} checked{% endif %}
+                  <input class="zoom-x15" type="checkbox"
+                    {% if shift.is_present %} checked{% endif %}
+                    {% if object.is_closed %} disabled{% endif %}
                     id="present-{{ shift.pk }}">
                   &nbsp;&nbsp;Present
                 </label>
               </div>
               <div class="col-sm-2">
                 <label>
-                  <input class="zoom-x15" type="checkbox"{% if shift.is_holiday %} checked{% endif %}
+                  <input class="zoom-x15" type="checkbox"
+                    {% if shift.is_holiday %} checked{% endif %}
+                    {% if object.is_closed %} disabled{% endif %}
                     id="holiday-{{ shift.pk }}">
                   &nbsp;&nbsp;Holiday
                 </label>
               </div>
               <div class="col-sm-2">
-                <input class="zoom-x12" type="number" min="0" max="8" size="4" value="{{ shift.permit_hours }}"
+                <input class="zoom-x12" type="number" min="0" max="8" size="4"
+                  value="{{ shift.permit_hours }}"
+                  {% if object.is_closed %} disabled{% endif %}
                   id="permit-{{ shift.pk }}">
               </div>
             </div>
