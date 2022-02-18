@@ -30,7 +30,7 @@ from workhours.mixins import IsInTeamUserMixin
 from workhours.models import Week
 
 
-class WeekUpdateForm(forms.ModelForm):
+class WeekCloseForm(forms.ModelForm):
     pk = forms.IntegerField(required=True)
     notes = forms.CharField(required=False)
 
@@ -43,7 +43,7 @@ class WeekCloseView(RequireLoginMixin,
                     IsInTeamUserMixin,
                     UpdateView):
     model = Week
-    form_class = WeekUpdateForm
+    form_class = WeekCloseForm
 
     def post(self, request, *args, **kwargs):
         form = super().get_form(form_class=self.form_class)
