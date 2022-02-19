@@ -29,14 +29,20 @@ class Employee(BaseModel):
     """
     Employees
     """
-    first_name = models.CharField(max_length=255,
-                                  blank=False,
-                                  null=False)
-    last_name = models.CharField(max_length=255,
-                                 blank=False,
-                                 null=False)
-    is_active = models.BooleanField(null=False,
-                                    default=True)
+    first_name = models.CharField(
+        max_length=255,
+        blank=False,
+        null=False,
+        verbose_name=pgettext_lazy('Employee', 'first name'))
+    last_name = models.CharField(
+        max_length=255,
+        blank=False,
+        null=False,
+        verbose_name=pgettext_lazy('Employee', 'last name'))
+    is_active = models.BooleanField(
+        null=False,
+        default=True,
+        verbose_name=pgettext_lazy('Employee', 'is active'))
 
     objects = models.Manager()
     objects_active = ManagerIsActive()

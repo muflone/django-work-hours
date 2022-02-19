@@ -30,16 +30,26 @@ class Team(BaseModel):
     """
     Teams
     """
-    name = models.CharField(max_length=255,
-                            blank=False,
-                            null=False)
-    description = models.TextField(blank=True,
-                                   null=False)
-    is_active = models.BooleanField(null=False,
-                                    default=True)
-    employees = models.ManyToManyField(to='Employee')
-    managers = models.ManyToManyField(to=get_user_model(),
-                                      blank=True)
+    name = models.CharField(
+        max_length=255,
+        blank=False,
+        null=False,
+        verbose_name=pgettext_lazy('Team', 'name'))
+    description = models.TextField(
+        blank=True,
+        null=False,
+        verbose_name=pgettext_lazy('Team', 'description'))
+    is_active = models.BooleanField(
+        null=False,
+        default=True,
+        verbose_name=pgettext_lazy('Team', 'is active'))
+    employees = models.ManyToManyField(
+        to='Employee',
+        verbose_name=pgettext_lazy('Team', 'employees'))
+    managers = models.ManyToManyField(
+        to=get_user_model(),
+        blank=True,
+        verbose_name=pgettext_lazy('Team', 'managers'))
 
     # Automatically filter on the enabled only records
     objects = models.Manager()

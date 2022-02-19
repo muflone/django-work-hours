@@ -28,14 +28,26 @@ class Shift(BaseModel):
     """
     Shifts
     """
-    week = models.ForeignKey(to='Week',
-                             on_delete=models.PROTECT)
-    employee = models.ForeignKey(to='Employee',
-                                 on_delete=models.PROTECT)
-    date = models.DateField(null=False)
-    is_present = models.BooleanField(default=False)
-    is_holiday = models.BooleanField(default=False)
-    permit_hours = models.PositiveSmallIntegerField(default=0)
+    week = models.ForeignKey(
+        to='Week',
+        on_delete=models.PROTECT,
+        verbose_name=pgettext_lazy('Shift', 'week'))
+    employee = models.ForeignKey(
+        to='Employee',
+        on_delete=models.PROTECT,
+        verbose_name=pgettext_lazy('Shift', 'employee'))
+    date = models.DateField(
+        null=False,
+        verbose_name=pgettext_lazy('Shift', 'date'))
+    is_present = models.BooleanField(
+        default=False,
+        verbose_name=pgettext_lazy('Shift', 'is present'))
+    is_holiday = models.BooleanField(
+        default=False,
+        verbose_name=pgettext_lazy('Shift', 'is holiday'))
+    permit_hours = models.PositiveSmallIntegerField(
+        default=0,
+        verbose_name=pgettext_lazy('Shift', 'permit hours'))
 
     class Meta:
         constraints = [

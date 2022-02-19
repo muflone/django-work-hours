@@ -20,6 +20,7 @@
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils.translation import pgettext_lazy
 
 from utility.managers import ManagerIsActive, ManagerUser
 from utility.models import BaseModel
@@ -28,18 +29,26 @@ from utility.models import BaseModel
 class User(BaseModel,
            AbstractUser):
     """User"""
-    email = models.EmailField(unique=True,
-                              blank=False,
-                              null=False)
-    first_name = models.CharField(max_length=255,
-                                  blank=False,
-                                  null=False)
-    last_name = models.CharField(max_length=255,
-                                 blank=False,
-                                 null=False)
-    login_redirect_page = models.CharField(max_length=255,
-                                           blank=True,
-                                           null=False)
+    email = models.EmailField(
+        unique=True,
+        blank=False,
+        null=False,
+        verbose_name=pgettext_lazy('User', 'email'))
+    first_name = models.CharField(
+        max_length=255,
+        blank=False,
+        null=False,
+        verbose_name=pgettext_lazy('User', 'first name'))
+    last_name = models.CharField(
+        max_length=255,
+        blank=False,
+        null=False,
+        verbose_name=pgettext_lazy('User', 'last name'))
+    login_redirect_page = models.CharField(
+        max_length=255,
+        blank=True,
+        null=False,
+        verbose_name=pgettext_lazy('User', 'redirect page after login'))
     # Remove the username field with unique constraint
     username = None
     # Set the user manager
@@ -53,8 +62,10 @@ class User(BaseModel,
         # Define the database table
         db_table = 'auth_users'
         ordering = ['id']
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name = pgettext_lazy('User',
+                                     'User')
+        verbose_name_plural = pgettext_lazy('User',
+                                            'Users')
 
     def __str__(self):
         return f'{self.get_full_name()} <{self.email}>'

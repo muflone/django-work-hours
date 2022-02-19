@@ -26,16 +26,24 @@ from .base_model import BaseModel, BaseModelAdmin
 
 class Configuration(BaseModel):
     """Configuration item"""
-    name = models.CharField(max_length=255,
-                            blank=False,
-                            null=False)
-    group = models.CharField(max_length=255,
-                             default='',
-                             blank=False,
-                             null=False)
-    value = models.TextField(blank=True,
-                             null=False)
-    description = models.TextField(blank=True)
+    name = models.CharField(
+        max_length=255,
+        blank=False,
+        null=False,
+        verbose_name=pgettext_lazy('Configuration', 'name'))
+    group = models.CharField(
+        max_length=255,
+        default='',
+        blank=False,
+        null=False,
+        verbose_name=pgettext_lazy('Configuration', 'group'))
+    value = models.TextField(
+        blank=True,
+        null=False,
+        verbose_name=pgettext_lazy('Configuration', 'value'))
+    description = models.TextField(
+        blank=True,
+        verbose_name=pgettext_lazy('Configuration', 'description'))
 
     class Meta:
         # Define the database table
