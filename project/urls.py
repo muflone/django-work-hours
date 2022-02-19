@@ -19,14 +19,18 @@
 ##
 
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import include, path
 
 
-urlpatterns = [
+urlpatterns = []
+# Add i18n prefixes for sections
+urlpatterns += i18n_patterns(
     path(settings.ADMIN_URL, admin.site.urls),
     path('', include('workhours.urls')),
-]
+    prefix_default_language=True
+)
 
 if settings.DEBUG:
     try:
