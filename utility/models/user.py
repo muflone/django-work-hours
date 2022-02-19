@@ -33,22 +33,22 @@ class User(BaseModel,
         unique=True,
         blank=False,
         null=False,
-        verbose_name=pgettext_lazy('User', 'email'))
+        verbose_name=pgettext_lazy('User', 'E-mail'))
     first_name = models.CharField(
         max_length=255,
         blank=False,
         null=False,
-        verbose_name=pgettext_lazy('User', 'first name'))
+        verbose_name=pgettext_lazy('User', 'First name'))
     last_name = models.CharField(
         max_length=255,
         blank=False,
         null=False,
-        verbose_name=pgettext_lazy('User', 'last name'))
+        verbose_name=pgettext_lazy('User', 'Last name'))
     login_redirect_page = models.CharField(
         max_length=255,
         blank=True,
         null=False,
-        verbose_name=pgettext_lazy('User', 'redirect page after login'))
+        verbose_name=pgettext_lazy('User', 'Redirect page after login'))
     # Remove the username field with unique constraint
     username = None
     # Set the user manager

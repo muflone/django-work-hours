@@ -31,19 +31,19 @@ class Week(BaseModel):
     team = models.ForeignKey(
         to='Team',
         on_delete=models.PROTECT,
-        verbose_name=pgettext_lazy('Week', 'team'))
+        verbose_name=pgettext_lazy('Week', 'Team'))
     starting_date = models.DateField(
         null=False,
-        verbose_name=pgettext_lazy('Week', 'starting date'))
+        verbose_name=pgettext_lazy('Week', 'Starting date'))
     ending_date = models.DateField(
         null=False,
-        verbose_name=pgettext_lazy('Week', 'ending date'))
+        verbose_name=pgettext_lazy('Week', 'Ending date'))
     notes = models.TextField(
         blank=True,
-        verbose_name=pgettext_lazy('Week', 'notes'))
+        verbose_name=pgettext_lazy('Week', 'Notes'))
     is_closed = models.BooleanField(
         default=False,
-        verbose_name=pgettext_lazy('Week', 'is closed'))
+        verbose_name=pgettext_lazy('Week', 'Is closed'))
 
     class Meta:
         constraints = [

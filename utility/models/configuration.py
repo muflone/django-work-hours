@@ -30,20 +30,20 @@ class Configuration(BaseModel):
         max_length=255,
         blank=False,
         null=False,
-        verbose_name=pgettext_lazy('Configuration', 'name'))
+        verbose_name=pgettext_lazy('Configuration', 'Name'))
     group = models.CharField(
         max_length=255,
         default='',
         blank=False,
         null=False,
-        verbose_name=pgettext_lazy('Configuration', 'group'))
+        verbose_name=pgettext_lazy('Configuration', 'Group'))
     value = models.TextField(
         blank=True,
         null=False,
-        verbose_name=pgettext_lazy('Configuration', 'value'))
+        verbose_name=pgettext_lazy('Configuration', 'Value'))
     description = models.TextField(
         blank=True,
-        verbose_name=pgettext_lazy('Configuration', 'description'))
+        verbose_name=pgettext_lazy('Configuration', 'Description'))
 
     class Meta:
         # Define the database table

@@ -31,23 +31,23 @@ class Shift(BaseModel):
     week = models.ForeignKey(
         to='Week',
         on_delete=models.PROTECT,
-        verbose_name=pgettext_lazy('Shift', 'week'))
+        verbose_name=pgettext_lazy('Shift', 'Week'))
     employee = models.ForeignKey(
         to='Employee',
         on_delete=models.PROTECT,
-        verbose_name=pgettext_lazy('Shift', 'employee'))
+        verbose_name=pgettext_lazy('Shift', 'Employee'))
     date = models.DateField(
         null=False,
-        verbose_name=pgettext_lazy('Shift', 'date'))
+        verbose_name=pgettext_lazy('Shift', 'Date'))
     is_present = models.BooleanField(
         default=False,
-        verbose_name=pgettext_lazy('Shift', 'is present'))
+        verbose_name=pgettext_lazy('Shift', 'Is present'))
     is_holiday = models.BooleanField(
         default=False,
-        verbose_name=pgettext_lazy('Shift', 'is holiday'))
+        verbose_name=pgettext_lazy('Shift', 'Is holiday'))
     permit_hours = models.PositiveSmallIntegerField(
         default=0,
-        verbose_name=pgettext_lazy('Shift', 'permit hours'))
+        verbose_name=pgettext_lazy('Shift', 'Permit hours'))
 
     class Meta:
         constraints = [

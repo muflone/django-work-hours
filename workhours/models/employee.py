@@ -33,16 +33,16 @@ class Employee(BaseModel):
         max_length=255,
         blank=False,
         null=False,
-        verbose_name=pgettext_lazy('Employee', 'first name'))
+        verbose_name=pgettext_lazy('Employee', 'First name'))
     last_name = models.CharField(
         max_length=255,
         blank=False,
         null=False,
-        verbose_name=pgettext_lazy('Employee', 'last name'))
+        verbose_name=pgettext_lazy('Employee', 'Last name'))
     is_active = models.BooleanField(
         null=False,
         default=True,
-        verbose_name=pgettext_lazy('Employee', 'is active'))
+        verbose_name=pgettext_lazy('Employee', 'Is active'))
 
     objects = models.Manager()
     objects_active = ManagerIsActive()
