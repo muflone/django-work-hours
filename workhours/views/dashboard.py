@@ -29,4 +29,4 @@ class DashboardView(RequireLoginMixin,
                     TeamMixin,
                     TemplateView):
     template_name = 'workhours/dashboard.html'
-    page_title = 'My dashboard'
+    page_title_1 = 'My dashboard'

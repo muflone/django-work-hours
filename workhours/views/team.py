@@ -36,11 +36,11 @@ class TeamView(RequireLoginMixin,
                DetailView):
     model = Team
     template_name = 'workhours/team.html'
-    page_title = 'Team'
+    page_title_1 = 'Team'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_title'] = self.object.name
+        context['page_title_1'] = self.object.name
         # Get the previous weeks
         weeks = []
         weeks_to_list = get_configuration_int(name=WEEKS_TO_LIST,

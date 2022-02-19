@@ -37,12 +37,12 @@ class WeekView(RequireLoginMixin,
                DetailView):
     model = Week
     template_name = 'workhours/week.html'
-    page_title = 'Week'
+    page_title_1 = 'Week'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         date_format = context['date_format_short']
-        context['page_title'] = (
+        context['page_title_1'] = (
             'Week from {STARTING_DATE} to {ENDING_DATE}'.format(
                 STARTING_DATE=format_date(value=self.object.starting_date,
                                           format_string=date_format),

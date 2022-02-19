@@ -47,7 +47,7 @@ class LoginForm(AuthenticationForm):
 class LoginView(GenericMixin,
                 DjangoLoginView):
     authentication_form = LoginForm
-    page_title = 'Login'
+    page_title_1 = 'Login'
     template_name = 'workhours/auth/login.html'
 
     def get_success_url(self):
