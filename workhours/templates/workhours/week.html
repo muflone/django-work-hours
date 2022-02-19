@@ -1,5 +1,6 @@
 {% extends 'workhours/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block body_header1_pre_title %}
                   <!-- Pre title -->
@@ -14,7 +15,7 @@
           <div class="modal-content">
             <div class="modal-body text-center p-5">
               <div class="spinner-border text-secondary mb-4" role="status" style="width:94px;height:94px;">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{% translate 'Loading...' context 'Week' %}</span>
               </div>
               <h4 id="modal-result" class="mt-1 mb-4"></h4>
               <h4 id="modal-step-title" class="mt-1 mb-4"></h4>
@@ -33,29 +34,31 @@
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="confirmation-dialog-label">Confirm?</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <h4 class="modal-title" id="confirmation-dialog-label">{% translate 'Confirm?' context 'Week' %}</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="{% translate 'Close' context 'Week' %}">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <p id="confirmation-dialog-text">
   {% if object.is_closed %}
-                  Are you sure you want to reopen the closed week?
+                  {% translate 'Are you sure you want to reopen the closed week?' context 'Week' %}
   {% else %}
-                  Are you sure you want to save the data and close the week?
+                  {% translate 'Are you sure you want to save the data and close the week?' context 'Week' %}
   {% endif %}
               </p>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-danger" id="confirmation-dialog-yes">
   {% if object.is_closed %}
-                Open the week
+                {% translate 'Reopen the week' context 'Week' %}
   {% else %}
-                Close the week
+                {% translate 'Close the week' context 'Week' %}
   {% endif %}
               </button>
-              <button type="button" class="btn btn-primary" id="confirmation-dialog-no" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="confirmation-dialog-no" data-dismiss="modal">
+                {% translate 'Cancel' context 'Week' %}
+              </button>
             </div>
           </div>
         </div>
@@ -65,32 +68,34 @@
         <h2 class="card-header">
           <span>
             <a class="card-link" data-toggle="collapse" href="#collapse-week" aria-expanded="true">
-                Week details
+                {% translate 'Week details' context 'Week' %}
             </a>
           </span>
   {% if not object.is_closed %}
-          <input class="btn btn-danger" type="button" value="Save all data and close the week"
+          <input class="btn btn-danger" type="button" value="{% translate 'Save all data and close the week' context 'Week' %}"
             id="week-save" data-toggle="modal" data-target="#confirmation-dialog">
   {% elif user.is_superuser %}
-          <input class="btn btn-danger" type="button" value="Reopen the week"
+          <input class="btn btn-danger" type="button" value="{% translate 'Reopen the week' context 'Week' %}"
             id="week-open" data-toggle="modal" data-target="#confirmation-dialog">
   {% endif %}
         </h2>
         <div id="collapse-week" class="collapse show">
           <div class="card-body">
             <div class="row card-row">
-              <div class="col-sm-1">Status</div>
+              <div class="col-sm-1">{% translate 'Status' context 'Week' %}</div>
               <div class="col-sm-9">
   {% if object.is_closed %}
                 <span class="fe fe-lock"></span>
   {% else %}
                 <span class="fe fe-check-circle"></span>
   {% endif %}
-                {{ object.is_closed | yesno:"Closed,Open" }}
+                {{ week_status }}
               </div>
             </div>
             <div class="row card-row">
-              <div class="col-sm-1"><label for="notes">Notes</label></div>
+              <div class="col-sm-1">
+                <label for="notes">{% translate 'Notes' context 'Week' %}</label>
+              </div>
   {% if not object.is_closed %}
               <div class="col-sm">
                 <input type="text" id="notes" name="notes" value="{{ object.notes }}" class="form-control">
@@ -112,17 +117,17 @@
             </a>
           </span>
     {% if not object.is_closed %}
-          <input class="btn btn-primary save-daily" type="button" value="Save daily data"
+          <input class="btn btn-primary save-daily" type="button" value="{% translate 'Save daily data' context 'Week' %}"
             id="save-{{ shift.pk }}" data-shifts="{{ day.3 }}" data-toggle="modal" data-target="#modal-dialog">
     {% endif %}
         </h2>
         <div id="collapse-{{ day.0 }}" class="collapse show">
           <div class="card-body">
             <div class="row card-row card-row-header">
-              <div class="col-sm-3">Name</div>
-              <div class="col-sm-2">Present</div>
-              <div class="col-sm-2">Holiday</div>
-              <div class="col-sm-2">Permit hours</div>
+              <div class="col-sm-3">{% translate 'Name' context 'Shift' %}</div>
+              <div class="col-sm-2">{% translate 'Is present' context 'Shift' %}</div>
+              <div class="col-sm-2">{% translate 'Is holiday' context 'Shift' %}</div>
+              <div class="col-sm-2">{% translate 'Permit hours' context 'Shift' %}</div>
             </div>
     {% for shift in day.2 %}
             <div class="row card-row {% if forloop.counter|divisibleby:2 %}card-row-alternate{% endif %}">
@@ -134,7 +139,7 @@
                     {% if shift.is_present %} checked{% endif %}
                     {% if object.is_closed %} disabled{% endif %}
                     id="present-{{ shift.pk }}">
-                  &nbsp;&nbsp;Present
+                  &nbsp;&nbsp;{% translate 'Is present' context 'Shift' %}
                 </label>
               </div>
               <div class="col-sm-2">
@@ -143,7 +148,7 @@
                     {% if shift.is_holiday %} checked{% endif %}
                     {% if object.is_closed %} disabled{% endif %}
                     id="holiday-{{ shift.pk }}">
-                  &nbsp;&nbsp;Holiday
+                  &nbsp;&nbsp;{% translate 'Is holiday' context 'Shift' %}
                 </label>
               </div>
               <div class="col-sm-2">
@@ -199,7 +204,7 @@
           step_width += step_size_percent;
           $("#modal-step-title").text(employee);
           $("#modal-progress-bar").css("width", step_width + "%");
-          $("#modal-result").text("Saving data for " + date);
+          $("#modal-result").text('{% translate 'Saving data for ' context 'Week' %}' + date);
           $.ajax({
               method: "POST",
               dataType: "json",
@@ -218,7 +223,7 @@
               },
               error: function () {
                 console.log('fail');
-                $("#modal-result").text("Unable to update");
+                $("#modal-result").text("{% translate 'Unable to update' context 'Week' %}");
               }
           });
           // Returning true the every() method processes the next iteration
@@ -243,7 +248,7 @@
               },
               error: function () {
                 console.log('fail');
-                $("#modal-result").text("Unable to update");
+                $("#modal-result").text("{% translate 'Unable to update' context 'Week' %}");
               }
           });
       }
@@ -262,7 +267,7 @@
             },
             error: function () {
               console.log('fail');
-              $("#modal-result").text("Unable to update");
+              $("#modal-result").text("{% translate 'Unable to update' context 'Week' %}");
             }
         });
         setTimeout(hide_dialog, {{ delay_after_save_week }});

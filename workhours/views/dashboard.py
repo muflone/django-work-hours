@@ -18,6 +18,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+from django.utils.translation import pgettext_lazy
 from django.views.generic import TemplateView
 
 from utility.mixins import RequireLoginMixin
@@ -29,4 +30,4 @@ class DashboardView(RequireLoginMixin,
                     TeamMixin,
                     TemplateView):
     template_name = 'workhours/dashboard.html'
-    page_title_1 = 'My dashboard'
+    page_title_1 = pgettext_lazy('Dashboard', 'My dashboard')

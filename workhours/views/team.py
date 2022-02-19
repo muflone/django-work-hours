@@ -20,6 +20,8 @@
 
 import datetime
 
+from django.utils.dateformat import format as format_date
+from django.utils.translation import pgettext_lazy
 from django.views.generic import DetailView
 
 from utility.extras import get_configuration_int
@@ -36,7 +38,7 @@ class TeamView(RequireLoginMixin,
                DetailView):
     model = Team
     template_name = 'workhours/team.html'
-    page_title_1 = 'Team'
+    page_title_1 = pgettext_lazy('Team', 'Team')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -65,6 +67,15 @@ class TeamView(RequireLoginMixin,
                     defaults={'is_closed': False})
             # Add a week if it was created or found
             if week:
-                weeks.append((week_number, week))
+                week_title = pgettext_lazy(
+                    'Week',
+                    'Week from {STARTING_DATE} to {ENDING_DATE}').format(
+                    STARTING_DATE=format_date(
+                        value=week.starting_date,
+                        format_string=context['date_format_short']),
+                    ENDING_DATE=format_date(
+                        value=week.ending_date,
+                        format_string=context['date_format_short']))
+                weeks.append((week_number, week, week_title))
         context['weeks'] = weeks
         return context

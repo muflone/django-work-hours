@@ -24,6 +24,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy
+from django.utils.translation import pgettext_lazy
 
 from .constants import ADMIN_INDEX_TITLE, ADMIN_SITE_HEADER, ADMIN_SITE_TITLE
 from .models import Configuration, ConfigurationAdmin, User
@@ -33,9 +34,10 @@ from .extras import get_configuration_value
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    password1 = forms.CharField(label='Password',
+    password1 = forms.CharField(label=pgettext_lazy('User', 'Password'),
                                 widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation',
+    password2 = forms.CharField(label=pgettext_lazy('User',
+                                                    'Password confirmation'),
                                 widget=forms.PasswordInput)
 
     class Meta:

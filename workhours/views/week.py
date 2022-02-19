@@ -21,6 +21,7 @@
 import datetime
 
 from django.utils.dateformat import format as format_date
+from django.utils.translation import pgettext_lazy
 from django.views.generic import DetailView
 
 from utility.extras import get_configuration_int
@@ -37,13 +38,14 @@ class WeekView(RequireLoginMixin,
                DetailView):
     model = Week
     template_name = 'workhours/week.html'
-    page_title_1 = 'Week'
+    page_title_1 = pgettext_lazy('Week', 'Week')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         date_format = context['date_format_short']
         context['page_title_1'] = (
-            'Week from {STARTING_DATE} to {ENDING_DATE}'.format(
+            pgettext_lazy('Week',
+                          'Week from {STARTING_DATE} to {ENDING_DATE}').format(
                 STARTING_DATE=format_date(value=self.object.starting_date,
                                           format_string=date_format),
                 ENDING_DATE=format_date(value=self.object.ending_date,
@@ -75,4 +77,7 @@ class WeekView(RequireLoginMixin,
                 shifts_ids.append(shift.pk)
             days.append((day_number, day, shifts, shifts_ids))
         context['days'] = days
+        context['week_status'] = (pgettext_lazy('Week', 'Closed')
+                                  if self.object.is_closed
+                                  else pgettext_lazy('Week', 'Open'))
         return context

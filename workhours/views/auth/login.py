@@ -22,6 +22,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView as DjangoLoginView
 from django.urls import reverse_lazy
+from django.utils.translation import pgettext_lazy
 
 from utility.mixins import GenericMixin
 
@@ -32,7 +33,7 @@ class LoginForm(AuthenticationForm):
         required=True,
         widget=forms.EmailInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Your email address',
+            'placeholder': pgettext_lazy('Auth', 'Your email address'),
             'autofocus': True
         }))
     password = forms.CharField(
@@ -40,14 +41,15 @@ class LoginForm(AuthenticationForm):
         required=True,
         widget=forms.PasswordInput(attrs={
             'class': 'form-control form-control-appended',
-            'placeholder': 'Insert your password'
+            'placeholder': pgettext_lazy('Auth', 'Insert your password')
         }))
 
 
 class LoginView(GenericMixin,
                 DjangoLoginView):
     authentication_form = LoginForm
-    page_title_1 = 'Login'
+    page_title_1 = pgettext_lazy('Auth', 'Login')
+    page_title_2 = pgettext_lazy('Auth', 'Insert your login information')
     template_name = 'workhours/auth/login.html'
 
     def get_success_url(self):

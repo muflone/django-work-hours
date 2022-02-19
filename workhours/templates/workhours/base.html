@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -42,9 +43,9 @@
               <span class="avatar-title rounded-circle" title="{{ user.get_full_name }}">{{ user.get_initials }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a href="#" class="dropdown-item">Your account</a>
+              <a href="#" class="dropdown-item">{% translate 'Your account' context 'Auth' %}</a>
               <hr class="dropdown-divider">
-              <a href="{% url 'workhours.auth.logout' %}" class="dropdown-item">Logout</a>
+              <a href="{% url 'workhours.auth.logout' %}" class="dropdown-item">{% translate 'Logout' context 'Auth' %}</a>
             </div>
           </div>
         </div>
@@ -53,7 +54,7 @@
 {% if not site_hide_dashboard %}
             <li class="nav-item mr-3">
               <a class="nav-link{% if request.resolver_match.url_name == 'workhours.dashboard' %} active{% endif %}" role="button"
-                 href="{% url 'workhours.dashboard' %}">Dashboard</a>
+                 href="{% url 'workhours.dashboard' %}">{% translate 'My dashboard' context 'Dashboard' %}</a>
             </li>
 {% endif %}
 {% for team in teams %}
@@ -64,7 +65,7 @@
   {# Add Week detail header #}
   {% if request.resolver_match.url_name == 'workhours.week' and object.team_id == team.pk %}
             <li class="nav-item mr-3">
-              <a class="nav-link active" role="button">Week details</a>
+              <a class="nav-link active" role="button">{% translate 'Week details' context 'Team' %}</a>
             </li>
   {% endif %}
 {% endfor %}

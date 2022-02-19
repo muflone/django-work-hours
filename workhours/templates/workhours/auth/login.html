@@ -1,10 +1,11 @@
 {% extends 'workhours/auth/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
     {{ block.super }}
-        <h1 class="display-4 text-center mb-3">Login</h1>
-        <p class="text-muted text-center mb-5">Insert your login information</p>
+        <h1 class="display-4 text-center mb-3">{{ page_title_1 }}</h1>
+        <p class="text-muted text-center mb-5">{{ page_title_2 }}</p>
         <form method="post" id="form-login" action="{% url 'workhours.auth.login' %}">
           {% csrf_token %}
           <div class="form-group">
@@ -24,7 +25,7 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-lg btn-block btn-primary mb-3">Login</button>
+          <button class="btn btn-lg btn-block btn-primary mb-3">{% translate 'Login' context 'Auth' %}</button>
         </form>
         <script>
           $(function() {
