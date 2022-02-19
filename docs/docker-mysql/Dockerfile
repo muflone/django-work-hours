@@ -23,6 +23,8 @@ RUN apt-get update && \
     echo "SECRET_KEY = '$(date +%s | sha256sum | base64 | head -c 50)'" >> "/app/project/settings_container.py" && \
     pip install -r /app/requirements.txt && \
     pip install mysqlclient && \
+    apt-get autoremove --yes default-libmysqlclient-dev build-essential && \
+    apt-get install --yes --no-install-recommends libmariadb3 && \
     rm -rf /var/lib/apt/lists/*
 EXPOSE 8080/tcp
 CMD ["bash", "/app/launch.sh", "8080"]
