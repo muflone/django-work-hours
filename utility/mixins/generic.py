@@ -46,9 +46,11 @@ class GenericMixin(ContextMixin,
                                               default=PRODUCT_NAME),
     }
     page_title_1 = ''
+    page_title_2 = ''
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['request_path'] = self.request.path
         context['page_title_1'] = self.page_title_1
+        context['page_title_2'] = self.page_title_2
         return context
