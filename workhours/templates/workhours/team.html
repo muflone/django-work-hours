@@ -46,12 +46,10 @@
     {% endif %}
               </div>
             </div>
-    {% if week.1.notes %}
             <div class="form-group row">
               <div class="col-sm-2">{% translate 'Notes' context 'Week' %}</div>
-              <div class="col-sm-10">{{ week.1.notes }}</div>
+              <div class="col-sm-10">{{ week.1.notes | default:'-' }}</div>
             </div>
-    {% endif %}
           </div>
         </div>
       </div>
