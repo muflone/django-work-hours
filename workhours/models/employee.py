@@ -59,9 +59,6 @@ class Employee(BaseModel):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
-    def full_name(self, item):
-        return str(item)
-
 
 class EmployeeAdmin(BaseModelAdmin):
     list_display = ('full_name', 'is_active')
