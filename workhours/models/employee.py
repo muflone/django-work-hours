@@ -61,8 +61,5 @@ class Employee(BaseModel):
 
 
 class EmployeeAdmin(BaseModelAdmin):
-    list_display = ('full_name', 'is_active')
+    list_display = ('__str__', 'is_active')
     list_filter = ('is_active', )
-
-    def full_name(self, item):
-        return str(item)
