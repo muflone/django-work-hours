@@ -51,10 +51,8 @@ class Week(BaseModel):
                                     name='week_unique_team_starting_date')
         ]
         ordering = ['-starting_date', '-ending_date', 'team']
-        verbose_name = pgettext_lazy('Week',
-                                     'Week')
-        verbose_name_plural = pgettext_lazy('Week',
-                                            'Weeks')
+        verbose_name = pgettext_lazy('Week', 'Week')
+        verbose_name_plural = pgettext_lazy('Week', 'Weeks')
 
     def __str__(self):
         return '{TEAM} - {START} - {END}'.format(

@@ -53,10 +53,8 @@ class Employee(BaseModel):
                                     name='employee_unique_first_last_name')
         ]
         ordering = ['first_name', 'last_name']
-        verbose_name = pgettext_lazy('Employee',
-                                     'Employee')
-        verbose_name_plural = pgettext_lazy('Employee',
-                                            'Employees')
+        verbose_name = pgettext_lazy('Employee', 'Employee')
+        verbose_name_plural = pgettext_lazy('Employee', 'Employees')
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

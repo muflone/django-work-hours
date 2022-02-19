@@ -48,10 +48,8 @@ class Configuration(BaseModel):
     class Meta:
         # Define the database table
         ordering = ['group', 'name']
-        verbose_name = pgettext_lazy('Configuration',
-                                     'Configuration')
-        verbose_name_plural = pgettext_lazy('Configuration',
-                                            'Configurations')
+        verbose_name = pgettext_lazy('Configuration', 'Configuration')
+        verbose_name_plural = pgettext_lazy('Configuration', 'Configurations')
 
     def __str__(self):
         return self.name

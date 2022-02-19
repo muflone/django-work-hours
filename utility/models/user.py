@@ -62,10 +62,8 @@ class User(BaseModel,
         # Define the database table
         db_table = 'auth_users'
         ordering = ['id']
-        verbose_name = pgettext_lazy('User',
-                                     'User')
-        verbose_name_plural = pgettext_lazy('User',
-                                            'Users')
+        verbose_name = pgettext_lazy('User', 'User')
+        verbose_name_plural = pgettext_lazy('User', 'Users')
 
     def __str__(self):
         return f'{self.get_full_name()} <{self.email}>'

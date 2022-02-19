@@ -55,10 +55,8 @@ class Shift(BaseModel):
                                     name='shift_unique_date_employee_date')
         ]
         ordering = ['-week', '-date', 'employee']
-        verbose_name = pgettext_lazy('Shift',
-                                     'Shift')
-        verbose_name_plural = pgettext_lazy('Shift',
-                                            'Shifts')
+        verbose_name = pgettext_lazy('Shift', 'Shift')
+        verbose_name_plural = pgettext_lazy('Shift', 'Shifts')
 
     def __str__(self):
         return self.date.strftime('%Y-%m-%d')

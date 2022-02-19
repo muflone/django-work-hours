@@ -57,10 +57,8 @@ class Team(BaseModel):
 
     class Meta:
         ordering = ['name']
-        verbose_name = pgettext_lazy('Team',
-                                     'Team')
-        verbose_name_plural = pgettext_lazy('Team',
-                                            'Teams')
+        verbose_name = pgettext_lazy('Team', 'Team')
+        verbose_name_plural = pgettext_lazy('Team', 'Teams')
 
     def __str__(self):
         return self.name
