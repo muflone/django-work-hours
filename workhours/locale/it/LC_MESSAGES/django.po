@@ -1,0 +1,308 @@
+# Django Work Hours - Application workhours
+# Copyright (C) 2022 Fabio Castelli (Muflone)
+# This file is distributed under the license GPL-3.
+# Fabio Castelli (Muflone) <muflone@muflone.com>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Django Work Hours\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-19 21:22+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Fabio Castelli (Muflone) <muflone@muflone.com>\n"
+"Language-Team: Italian\n"
+"Language: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: workhours/models/employee.py:36
+msgctxt "Employee"
+msgid "First name"
+msgstr "Nome"
+
+#: workhours/models/employee.py:41
+msgctxt "Employee"
+msgid "Last name"
+msgstr "Cognome"
+
+#: workhours/models/employee.py:45
+msgctxt "Employee"
+msgid "Is active"
+msgstr "È attivo"
+
+#: workhours/models/employee.py:56
+msgctxt "Employee"
+msgid "Employee"
+msgstr "Dipendente"
+
+#: workhours/models/employee.py:57
+msgctxt "Employee"
+msgid "Employees"
+msgstr "Dipendenti"
+
+#: workhours/models/shift.py:34
+msgctxt "Shift"
+msgid "Week"
+msgstr "Settimana"
+
+#: workhours/models/shift.py:38
+msgctxt "Shift"
+msgid "Employee"
+msgstr "Dipendente"
+
+#: workhours/models/shift.py:41
+msgctxt "Shift"
+msgid "Date"
+msgstr "Data"
+
+#: workhours/models/shift.py:44 workhours/templates/workhours/week.html:128
+#: workhours/templates/workhours/week.html:142
+msgctxt "Shift"
+msgid "Is present"
+msgstr "È presente"
+
+#: workhours/models/shift.py:47 workhours/templates/workhours/week.html:129
+#: workhours/templates/workhours/week.html:151
+msgctxt "Shift"
+msgid "Is holiday"
+msgstr "È in ferie"
+
+#: workhours/models/shift.py:50 workhours/templates/workhours/week.html:130
+msgctxt "Shift"
+msgid "Permit hours"
+msgstr "Ore di permesso"
+
+#: workhours/models/shift.py:58
+msgctxt "Shift"
+msgid "Shift"
+msgstr "Turno"
+
+#: workhours/models/shift.py:59
+msgctxt "Shift"
+msgid "Shifts"
+msgstr "Turni"
+
+#: workhours/models/team.py:37
+msgctxt "Team"
+msgid "Name"
+msgstr "Nome"
+
+#: workhours/models/team.py:41
+msgctxt "Team"
+msgid "Description"
+msgstr "Descrizione"
+
+#: workhours/models/team.py:45
+msgctxt "Team"
+msgid "Is active"
+msgstr "È attivo"
+
+#: workhours/models/team.py:48
+msgctxt "Team"
+msgid "Employees"
+msgstr "Dipendenti"
+
+#: workhours/models/team.py:52
+msgctxt "Team"
+msgid "Managers"
+msgstr "Referenti"
+
+#: workhours/models/team.py:60 workhours/views/team.py:41
+msgctxt "Team"
+msgid "Team"
+msgstr "Team"
+
+#: workhours/models/team.py:61
+msgctxt "Team"
+msgid "Teams"
+msgstr "Team"
+
+#: workhours/models/week.py:34
+msgctxt "Week"
+msgid "Team"
+msgstr "Team"
+
+#: workhours/models/week.py:37 workhours/templates/workhours/team.html:30
+msgctxt "Week"
+msgid "Starting date"
+msgstr "Data d'inizio"
+
+#: workhours/models/week.py:40 workhours/templates/workhours/team.html:34
+msgctxt "Week"
+msgid "Ending date"
+msgstr "Data di fine"
+
+#: workhours/models/week.py:43 workhours/templates/workhours/team.html:51
+#: workhours/templates/workhours/week.html:97
+msgctxt "Week"
+msgid "Notes"
+msgstr "Note"
+
+#: workhours/models/week.py:46
+msgctxt "Week"
+msgid "Is closed"
+msgstr "È chiusa"
+
+#: workhours/models/week.py:54 workhours/views/week.py:41
+msgctxt "Week"
+msgid "Week"
+msgstr "Settimana"
+
+#: workhours/models/week.py:55
+msgctxt "Week"
+msgid "Weeks"
+msgstr "Settimane"
+
+#: workhours/templates/workhours/auth/login.html:28
+#: workhours/views/auth/login.py:51
+msgctxt "Auth"
+msgid "Login"
+msgstr "Accedi"
+
+#: workhours/templates/workhours/base.html:46
+msgctxt "Auth"
+msgid "Your account"
+msgstr "Il tuo account"
+
+#: workhours/templates/workhours/base.html:48
+msgctxt "Auth"
+msgid "Logout"
+msgstr "Disconnetti"
+
+#: workhours/templates/workhours/base.html:57 workhours/views/dashboard.py:33
+msgctxt "Dashboard"
+msgid "My dashboard"
+msgstr "La mia bacheca"
+
+#: workhours/templates/workhours/base.html:68
+msgctxt "Team"
+msgid "Week details"
+msgstr "Dettagli della settimana"
+
+#: workhours/templates/workhours/team.html:22
+msgctxt "Team"
+msgid "Show details"
+msgstr "Mostra dettagli"
+
+#: workhours/templates/workhours/team.html:38
+#: workhours/templates/workhours/week.html:85
+msgctxt "Week"
+msgid "Status"
+msgstr "Stato"
+
+#: workhours/templates/workhours/team.html:41 workhours/views/week.py:80
+msgctxt "Week"
+msgid "Closed"
+msgstr "Chiusa"
+
+#: workhours/templates/workhours/team.html:42
+msgctxt "Week"
+msgid "No modifications are possible"
+msgstr "Le modifiche non sono possibili"
+
+#: workhours/templates/workhours/team.html:44 workhours/views/week.py:82
+msgctxt "Week"
+msgid "Open"
+msgstr "Aperta"
+
+#: workhours/templates/workhours/team.html:45
+msgctxt "Week"
+msgid "You can change the data"
+msgstr "Puoi cambiare i dati"
+
+#: workhours/templates/workhours/week.html:18
+msgctxt "Week"
+msgid "Loading..."
+msgstr "Caricamento..."
+
+#: workhours/templates/workhours/week.html:37
+msgctxt "Week"
+msgid "Confirm?"
+msgstr "Confermare?"
+
+#: workhours/templates/workhours/week.html:38
+msgctxt "Week"
+msgid "Close"
+msgstr "Chiudi"
+
+#: workhours/templates/workhours/week.html:45
+msgctxt "Week"
+msgid "Are you sure you want to reopen the closed week?"
+msgstr "Sei sicuro di voler riaprire la settimana chiusa?"
+
+#: workhours/templates/workhours/week.html:47
+msgctxt "Week"
+msgid "Are you sure you want to save the data and close the week?"
+msgstr "Sei sicuro di voler salvare i dati e chiudere la settimana?"
+
+#: workhours/templates/workhours/week.html:54
+#: workhours/templates/workhours/week.html:78
+msgctxt "Week"
+msgid "Reopen the week"
+msgstr "Riapri la settimana"
+
+#: workhours/templates/workhours/week.html:56
+msgctxt "Week"
+msgid "Close the week"
+msgstr "Chiudi la settimana"
+
+#: workhours/templates/workhours/week.html:60
+msgctxt "Week"
+msgid "Cancel"
+msgstr "Annulla"
+
+#: workhours/templates/workhours/week.html:71
+msgctxt "Week"
+msgid "Week details"
+msgstr "Dettagli della settimana"
+
+#: workhours/templates/workhours/week.html:75
+msgctxt "Week"
+msgid "Save all data and close the week"
+msgstr "Salva tutti i dati e chiudere la setimana"
+
+#: workhours/templates/workhours/week.html:120
+msgctxt "Week"
+msgid "Save daily data"
+msgstr "Salva i dati giornalieri"
+
+#: workhours/templates/workhours/week.html:127
+msgctxt "Shift"
+msgid "Name"
+msgstr "Nome"
+
+#: workhours/templates/workhours/week.html:207
+msgctxt "Week"
+msgid "Saving data for "
+msgstr "Salvataggio dati per "
+
+#: workhours/templates/workhours/week.html:226
+#: workhours/templates/workhours/week.html:251
+#: workhours/templates/workhours/week.html:270
+msgctxt "Week"
+msgid "Unable to update"
+msgstr "Impossibile aggiornare"
+
+#: workhours/views/auth/login.py:36
+msgctxt "Auth"
+msgid "Your email address"
+msgstr "Il tuo indirizzo email"
+
+#: workhours/views/auth/login.py:44
+msgctxt "Auth"
+msgid "Insert your password"
+msgstr "Inserisci la tua password"
+
+#: workhours/views/auth/login.py:52
+msgctxt "Auth"
+msgid "Insert your login information"
+msgstr "Inserisci le tue informazioni di accesso"
+
+#: workhours/views/team.py:72 workhours/views/week.py:48
+#, python-brace-format
+msgctxt "Week"
+msgid "Week from {STARTING_DATE} to {ENDING_DATE}"
+msgstr "Settimana dal {STARTING_DATE} al {ENDING_DATE}"
