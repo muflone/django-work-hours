@@ -19,10 +19,10 @@ COPY "settings_container.py" "/app/project/"
 COPY "launch.sh" "/app/"
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends gettext && \
-    rm -rf /var/lib/apt/lists/* && \
     echo "SECRET_KEY = '$(date +%s | sha256sum | base64 | head -c 50)'" >> "/app/project/settings_container.py" && \
     pip install -r /app/requirements.txt && \
-    touch /var/lib/django-work-hours.sqlite3
+    touch /var/lib/django-work-hours.sqlite3 && \
+    rm -rf /var/lib/apt/lists/*
 EXPOSE 8080/tcp
 CMD ["bash", "/app/launch.sh", "8080"]
 
