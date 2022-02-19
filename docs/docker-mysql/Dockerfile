@@ -20,6 +20,7 @@ COPY "launch.sh" "/app/"
 COPY "wait-for-it.sh" "/app/"
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends default-libmysqlclient-dev build-essential gettext && \
+    rm -rf /var/lib/apt/lists/* && \
     echo "SECRET_KEY = '$(date +%s | sha256sum | base64 | head -c 50)'" >> "/app/project/settings_container.py" && \
     pip install -r /app/requirements.txt && \
     pip install mysqlclient
