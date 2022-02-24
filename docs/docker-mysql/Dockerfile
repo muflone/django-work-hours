@@ -2,7 +2,7 @@ FROM python:3.9-slim-buster
 
 # App information
 ENV app_name django-work-hours
-ENV app_version 0.2.4
+ENV app_version 0.3.0
 
 # Container metadata
 LABEL maintainer="ilmuflone"
