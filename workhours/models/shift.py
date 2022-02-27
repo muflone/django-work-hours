@@ -23,6 +23,8 @@ from django.utils.translation import pgettext_lazy
 
 from utility.models import BaseModel, BaseModelAdmin
 
+from workhours.constants import PERMISSION_CAN_ACCESS_REPORTS
+
 
 class Shift(BaseModel):
     """
@@ -57,6 +59,9 @@ class Shift(BaseModel):
         ordering = ['-week', '-date', 'employee']
         verbose_name = pgettext_lazy('Shift', 'Shift')
         verbose_name_plural = pgettext_lazy('Shift', 'Shifts')
+        permissions = [
+            (PERMISSION_CAN_ACCESS_REPORTS, 'Can access reports')
+        ]
 
     def __str__(self):
         return self.date.strftime('%Y-%m-%d')

@@ -20,21 +20,25 @@
 
 import datetime
 
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.utils.translation import pgettext_lazy
 from django.views.generic import FormView
 
 from utility.extras import iter_dates, iter_days
-from utility.mixins import RequireSuperUserMixin
+from utility.mixins import RequireLoginMixin
 
-from workhours.constants import REPORT_TEAMS_HTML
+from workhours.constants import (PERMISSION_CAN_ACCESS_REPORTS,
+                                 REPORT_TEAMS_HTML)
 from workhours.forms import ReportForm
 from workhours.mixins import TeamMixin
 from workhours.models import Employee, Shift, Team
 
 
-class ReportsView(RequireSuperUserMixin,
+class ReportsView(RequireLoginMixin,
+                  PermissionRequiredMixin,
                   TeamMixin,
                   FormView):
+    permission_required = (f'workhours.{PERMISSION_CAN_ACCESS_REPORTS}', )
     template_name = 'workhours/reports/base.html'
     page_title_1 = pgettext_lazy('Reports', 'Reports')
     form_class = ReportForm

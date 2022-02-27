@@ -57,7 +57,7 @@
                  href="{% url 'workhours.dashboard' %}">{% translate 'My dashboard' context 'Dashboard' %}</a>
             </li>
 {% endif %}
-{% if user.is_superuser %}
+{% if perms.workhours.can_access_reports %}
             <li class="nav-item mr-3">
               <a class="nav-link{% if request.resolver_match.url_name == 'workhours.reports' %} active{% endif %}" role="button"
                  href="{% url 'workhours.reports' %}">{% translate 'Reports' context 'Reports' %}</a>
