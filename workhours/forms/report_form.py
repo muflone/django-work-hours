@@ -31,15 +31,15 @@ from workhours.constants import REPORT_TEAMS_HTML
 class ReportForm(forms.Form):
     report_type = forms.ChoiceField(
         choices=[(REPORT_TEAMS_HTML,
-                  pgettext_lazy('Report', 'Teams in HTML')),
+                  pgettext_lazy('Reports', 'Teams in HTML')),
                  ],
         required=True,
-        label=pgettext_lazy('Report', 'Report type'),
+        label=pgettext_lazy('Reports', 'Report type'),
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     starting_date = forms.DateField(
         required=True,
-        label=pgettext_lazy('Report', 'Starting date'),
+        label=pgettext_lazy('Reports', 'Starting date'),
         widget=DatePickerInput(format='%Y/%m/%d',
                                options={'showClose': False,
                                         'showClear': False,
@@ -48,7 +48,7 @@ class ReportForm(forms.Form):
         initial=datetime.date.today().strftime('%Y/%m/%d'))
     ending_date = forms.DateField(
         required=True,
-        label=pgettext_lazy('Report', 'Ending date'),
+        label=pgettext_lazy('Reports', 'Ending date'),
         widget=DatePickerInput(format='%Y/%m/%d',
                                options={'showClose': False,
                                         'showClear': False,

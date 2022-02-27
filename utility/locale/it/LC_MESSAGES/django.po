@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Django Work Hours\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-27 04:43+0100\n"
+"POT-Creation-Date: 2022-02-27 05:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fabio Castelli (Muflone) <muflone@muflone.com>\n"
 "Language-Team: Italian\n"
@@ -58,32 +58,32 @@ msgctxt "Configuration"
 msgid "Configurations"
 msgstr "Configurazioni"
 
-#: utility/models/user.py:36
+#: utility/models/user.py:37
 msgctxt "User"
 msgid "E-mail"
 msgstr "E-mail"
 
-#: utility/models/user.py:41
+#: utility/models/user.py:42
 msgctxt "User"
 msgid "First name"
 msgstr "Nome"
 
-#: utility/models/user.py:46
+#: utility/models/user.py:47
 msgctxt "User"
 msgid "Last name"
 msgstr "Cognome"
 
-#: utility/models/user.py:51
+#: utility/models/user.py:52
 msgctxt "User"
 msgid "Redirect page after login"
 msgstr "Pagina di redirezione dopo l'accesso"
 
-#: utility/models/user.py:65
+#: utility/models/user.py:66
 msgctxt "User"
 msgid "User"
 msgstr "Utente"
 
-#: utility/models/user.py:66
+#: utility/models/user.py:67
 msgctxt "User"
 msgid "Users"
 msgstr "Utenti"

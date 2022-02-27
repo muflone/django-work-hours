@@ -7,7 +7,7 @@
         <h2 class="card-header">
           <span>
             <a class="card-link" data-toggle="collapse" href="#collapse-options" aria-expanded="true">
-              {% translate 'Report options' context 'Report' %}
+              {% translate 'Report options' context 'Reports' %}
             </a>
           </span>
         </h2>
@@ -30,7 +30,7 @@
                 <div>{{ form.ending_date.errors }}</div>
               </div>
               <div class="row card-row">
-                <button class="offset-1 btn btn-lg btn-primary">{% translate 'Process report' context 'Report' %}</button>
+                <button class="offset-1 btn btn-lg btn-primary">{% translate 'Process report' context 'Reports' %}</button>
               </div>
              {% csrf_token %}
             </form>

@@ -33,11 +33,11 @@ from workhours.mixins import TeamMixin
 from workhours.models import Employee, Shift, Team
 
 
-class ReportView(RequireSuperUserMixin,
-                 TeamMixin,
-                 FormView):
+class ReportsView(RequireSuperUserMixin,
+                  TeamMixin,
+                  FormView):
     template_name = 'workhours/reports/base.html'
-    page_title_1 = pgettext_lazy('Report', 'Report')
+    page_title_1 = pgettext_lazy('Reports', 'Reports')
     form_class = ReportForm
 
     def form_valid(self, form):
