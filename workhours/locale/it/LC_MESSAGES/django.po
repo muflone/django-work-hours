@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Django Work Hours\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-27 05:02+0100\n"
+"POT-Creation-Date: 2022-02-28 00:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fabio Castelli (Muflone) <muflone@muflone.com>\n"
 "Language-Team: Italian\n"
@@ -63,22 +63,22 @@ msgctxt "Employee"
 msgid "Employees"
 msgstr "Dipendenti"
 
-#: workhours/models/shift.py:34
+#: workhours/models/shift.py:36
 msgctxt "Shift"
 msgid "Week"
 msgstr "Settimana"
 
-#: workhours/models/shift.py:38
+#: workhours/models/shift.py:40
 msgctxt "Shift"
 msgid "Employee"
 msgstr "Dipendente"
 
-#: workhours/models/shift.py:41
+#: workhours/models/shift.py:43
 msgctxt "Shift"
 msgid "Date"
 msgstr "Data"
 
-#: workhours/models/shift.py:44
+#: workhours/models/shift.py:46
 #: workhours/templates/workhours/reports/teams_html.html:43
 #: workhours/templates/workhours/week.html:128
 #: workhours/templates/workhours/week.html:142
@@ -86,7 +86,7 @@ msgctxt "Shift"
 msgid "Is present"
 msgstr "È presente"
 
-#: workhours/models/shift.py:47
+#: workhours/models/shift.py:49
 #: workhours/templates/workhours/reports/teams_html.html:50
 #: workhours/templates/workhours/week.html:129
 #: workhours/templates/workhours/week.html:151
@@ -94,19 +94,19 @@ msgctxt "Shift"
 msgid "Is holiday"
 msgstr "È in ferie"
 
-#: workhours/models/shift.py:50
+#: workhours/models/shift.py:52
 #: workhours/templates/workhours/reports/teams_html.html:64
 #: workhours/templates/workhours/week.html:130
 msgctxt "Shift"
 msgid "Permit hours"
 msgstr "Ore di permesso"
 
-#: workhours/models/shift.py:58
+#: workhours/models/shift.py:60
 msgctxt "Shift"
 msgid "Shift"
 msgstr "Turno"
 
-#: workhours/models/shift.py:59
+#: workhours/models/shift.py:61
 msgctxt "Shift"
 msgid "Shifts"
 msgstr "Turni"
@@ -146,43 +146,43 @@ msgctxt "Team"
 msgid "Teams"
 msgstr "Team"
 
-#: workhours/models/week.py:34
+#: workhours/models/week.py:36
 msgctxt "Week"
 msgid "Team"
 msgstr "Team"
 
-#: workhours/models/week.py:37 workhours/templates/workhours/team.html:30
+#: workhours/models/week.py:39 workhours/templates/workhours/team.html:30
 msgctxt "Week"
 msgid "Starting date"
 msgstr "Data d'inizio"
 
-#: workhours/models/week.py:40 workhours/templates/workhours/team.html:34
+#: workhours/models/week.py:42 workhours/templates/workhours/team.html:34
 msgctxt "Week"
 msgid "Ending date"
 msgstr "Data di fine"
 
-#: workhours/models/week.py:43 workhours/templates/workhours/team.html:50
+#: workhours/models/week.py:45 workhours/templates/workhours/team.html:50
 #: workhours/templates/workhours/week.html:97
 msgctxt "Week"
 msgid "Notes"
 msgstr "Note"
 
-#: workhours/models/week.py:46
+#: workhours/models/week.py:48
 msgctxt "Week"
 msgid "Is closed"
 msgstr "È chiusa"
 
-#: workhours/models/week.py:54 workhours/views/week.py:41
+#: workhours/models/week.py:56 workhours/views/week.py:44
 msgctxt "Week"
 msgid "Week"
 msgstr "Settimana"
 
-#: workhours/models/week.py:55
+#: workhours/models/week.py:57
 msgctxt "Week"
 msgid "Weeks"
 msgstr "Settimane"
 
-#: workhours/templates/workhours/auth/login.html:28
+#: workhours/templates/workhours/auth/login.html:29
 #: workhours/views/auth/login.py:51
 msgctxt "Auth"
 msgid "Login"
@@ -203,7 +203,7 @@ msgctxt "Dashboard"
 msgid "My dashboard"
 msgstr "La mia bacheca"
 
-#: workhours/templates/workhours/base.html:63 workhours/views/reports.py:40
+#: workhours/templates/workhours/base.html:63 workhours/views/reports.py:43
 msgctxt "Reports"
 msgid "Reports"
 msgstr "Rapporti"
@@ -250,7 +250,7 @@ msgctxt "Week"
 msgid "Status"
 msgstr "Stato"
 
-#: workhours/templates/workhours/team.html:41 workhours/views/week.py:80
+#: workhours/templates/workhours/team.html:41 workhours/views/week.py:91
 msgctxt "Week"
 msgid "Closed"
 msgstr "Chiusa"
@@ -260,7 +260,7 @@ msgctxt "Week"
 msgid "No modifications are possible"
 msgstr "Le modifiche non sono possibili"
 
-#: workhours/templates/workhours/team.html:44 workhours/views/week.py:82
+#: workhours/templates/workhours/team.html:44 workhours/views/week.py:93
 msgctxt "Week"
 msgid "Open"
 msgstr "Aperta"
@@ -317,23 +317,25 @@ msgid "Week details"
 msgstr "Dettagli della settimana"
 
 #: workhours/templates/workhours/week.html:75
+#: workhours/templates/workhours/week.html:188
 msgctxt "Week"
 msgid "Save all data and close the week"
 msgstr "Salva tutti i dati e chiudere la setimana"
 
 #: workhours/templates/workhours/week.html:120
+#: workhours/templates/workhours/week.html:175
 msgctxt "Week"
 msgid "Save daily data"
 msgstr "Salva i dati giornalieri"
 
-#: workhours/templates/workhours/week.html:207
+#: workhours/templates/workhours/week.html:211
 msgctxt "Week"
 msgid "Saving data for "
 msgstr "Salvataggio dati per "
 
-#: workhours/templates/workhours/week.html:226
-#: workhours/templates/workhours/week.html:251
-#: workhours/templates/workhours/week.html:270
+#: workhours/templates/workhours/week.html:230
+#: workhours/templates/workhours/week.html:255
+#: workhours/templates/workhours/week.html:274
 msgctxt "Week"
 msgid "Unable to update"
 msgstr "Impossibile aggiornare"
@@ -353,7 +355,7 @@ msgctxt "Auth"
 msgid "Insert your login information"
 msgstr "Inserisci le tue informazioni di accesso"
 
-#: workhours/views/team.py:72 workhours/views/week.py:48
+#: workhours/views/team.py:72 workhours/views/week.py:51
 #, python-brace-format
 msgctxt "Week"
 msgid "Week from {STARTING_DATE} to {ENDING_DATE}"
