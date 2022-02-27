@@ -53,5 +53,9 @@ class LoginView(GenericMixin,
     template_name = 'workhours/auth/login.html'
 
     def get_success_url(self):
-        result = reverse_lazy('workhours.home')
+        if next_page := (self.request.GET.get('next') or
+                         self.request.POST.get('next')):
+            result = next_page
+        else:
+            result = reverse_lazy('workhours.home')
         return result
