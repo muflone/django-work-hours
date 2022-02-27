@@ -20,7 +20,6 @@
 
 import datetime
 
-from django.template.response import TemplateResponse
 from django.utils.translation import pgettext_lazy
 from django.views.generic import FormView
 
@@ -65,7 +64,7 @@ class ReportsView(RequireSuperUserMixin,
 
     def report_teams_html(self,
                           starting_date: datetime.date,
-                          ending_date: datetime.date) -> TemplateResponse:
+                          ending_date: datetime.date) -> dict:
         results = []
         for team in Team.objects.order_by('name'):
             data = {}
