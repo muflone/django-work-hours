@@ -186,9 +186,11 @@
           data = data.concat($(object).data("shifts"));
         });
         show_dialog('{% translate 'Save all data and close the week' context 'Week' %}', '');
-        update_shifts(data);
-        update_week();
-        setTimeout(hide_dialog, {{ delay_after_save_week }});
+        setTimeout(function() {
+          update_shifts(data);
+          update_week();
+          setTimeout(hide_dialog, {{ delay_after_save_week }});
+        }, {{ delay_before_save_week }});
       });
       // Update data using the modal dialog
       function update_shifts(data) {

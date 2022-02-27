@@ -29,7 +29,8 @@ from utility.mixins import RequireLoginMixin
 
 from workhours.constants import (DELAY_AFTER_SAVE_DAY,
                                  DELAY_AFTER_SAVE_WEEK,
-                                 DELAY_BEFORE_SAVE_DAY)
+                                 DELAY_BEFORE_SAVE_DAY,
+                                 DELAY_BEFORE_SAVE_WEEK)
 from workhours.mixins import IsInTeamUserMixin, TeamMixin
 from workhours.models import Team, Shift, Week
 
@@ -62,6 +63,10 @@ class WeekView(RequireLoginMixin,
         )
         context['delay_before_save_day'] = get_configuration_int(
             name=DELAY_BEFORE_SAVE_DAY,
+            default=0
+        )
+        context['delay_before_save_week'] = get_configuration_int(
+            name=DELAY_BEFORE_SAVE_WEEK,
             default=0
         )
         # Get the team employees
