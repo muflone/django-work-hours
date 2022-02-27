@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -121,3 +122,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Define the custom user model
 AUTH_USER_MODEL = 'utility.User'
+LOGIN_URL = '/'
+
+# Sessions expire after 2 hours after last activity
+SESSION_EXPIRE_SECONDS = 7200
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
