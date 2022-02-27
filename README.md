@@ -35,6 +35,7 @@ The Python dependencies for the server part are listed in the
 * Python >= 3.9
 * Django 4.0.x (https://pypi.org/project/Django/)
 * Django Admin List Filter Dropdown (https://pypi.org/project/django-admin-list-filter-dropdown/)
+* Django Bootstrap Date-Picker Plus (https://pypi.org/project/django-bootstrap-datepicker-plus/)
 
 Additional optional dependencies might be needed to use your desired
 database.
