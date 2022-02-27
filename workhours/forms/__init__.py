@@ -18,10 +18,4 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-DELAY_AFTER_SAVE_SHIFT = 'delay_after_save_shift'
-DELAY_AFTER_SAVE_DAY = 'delay_after_save_day'
-DELAY_AFTER_SAVE_WEEK = 'delay_after_save_week'
-
-WEEKS_TO_LIST = 'weeks_to_list'
-
-REPORT_TEAMS_HTML = 'teams_html'
+from .report_form import ReportForm                                # noqa: F401

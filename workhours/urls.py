@@ -22,6 +22,7 @@ from django.urls import path
 
 from .views import (DashboardView,
                     HomeView,
+                    ReportView,
                     ShiftUpdateView,
                     TeamView,
                     WeekCloseView,
@@ -73,3 +74,7 @@ urlpatterns.append(path(route='week/'
                               'open',
                         view=WeekOpenView.as_view(),
                         name='workhours.week.open'))
+# Report page
+urlpatterns.append(path(route='report',
+                        view=ReportView.as_view(),
+                        name='workhours.report'))

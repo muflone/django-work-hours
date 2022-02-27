@@ -57,6 +57,12 @@
                  href="{% url 'workhours.dashboard' %}">{% translate 'My dashboard' context 'Dashboard' %}</a>
             </li>
 {% endif %}
+{% if user.is_superuser %}
+            <li class="nav-item mr-3">
+              <a class="nav-link{% if request.resolver_match.url_name == 'workhours.report' %} active{% endif %}" role="button"
+                 href="{% url 'workhours.report' %}">{% translate 'Report' context 'Report' %}</a>
+            </li>
+{% endif %}
 {% for team in teams %}
             <li class="nav-item mr-3">
               <a class="nav-link{% if request.resolver_match.url_name == 'workhours.team' and object.pk == team.pk %} active{% endif %}" role="button"

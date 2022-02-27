@@ -1,0 +1,71 @@
+{% extends 'workhours/reports/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load get_dictionary_value %}
+
+{% block header_css %}
+  {{ block.super }}
+    <link rel="stylesheet" href="{% static 'workhours/css/report-teams.css' %}">
+{% endblock %}
+
+{% block results %}
+  {% for team_data in results %}
+      <div class="card">
+        <h2 class="card-header">
+          <span>
+            <a class="card-link" data-toggle="collapse" href="#collapse-team-{{ team_data.0 }}" aria-expanded="true">
+              {{ team_data.1 }}
+            </a>
+          </span>
+        </h2>
+        <div id="collapse-team-{{ team_data.0 }}" class="collapse show">
+          <div class="card-body">
+            <table class="report">
+              <thead>
+                <tr>
+                  <td class="employee">{% translate 'Name' context 'Shift' %}</td>
+                  <td class="type">{% translate 'Type' context 'Report' %}</td>
+    {% for day in days %}
+                  <td class="date">{{ day | date:'d' }}</td>
+    {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+    {% for employee_id, shifts in team_data.2.items %}
+      {# Present #}
+                <tr>
+                  <td class="employee separator" rowspan="4">{{ employees | get_dictionary_value:employee_id }}</td>
+                  <td class="type separator">{% translate 'Is present' context 'Shift' %}</td>
+      {% for shift in shifts %}
+                  <td class="date separator">{% if shift.is_present %}X{% endif %}</td>
+      {% endfor %}
+                </tr>
+      {# Holiday #}
+                <tr>
+                  <td class="type">{% translate 'Is holiday' context 'Shift' %}</td>
+      {% for shift in shifts %}
+                  <td class="date">{% if shift.is_holiday %}X{% endif %}</td>
+      {% endfor %}
+                </tr>
+      {# Absent #}
+                <tr>
+                  <td class="type">{% translate 'Is absent' context 'Report' %}</td>
+      {% for shift in shifts %}
+                  <td class="date">{% if not shift.is_present and not shift.is_holiday %}X{% endif %}</td>
+      {% endfor %}
+                </tr>
+      {# Permit hours #}
+                <tr>
+                  <td class="type">{% translate 'Permit hours' context 'Shift' %}</td>
+      {% for shift in shifts %}
+                  <td class="date">{% if shift.permit_hours > 0 %}{{ shift.permit_hours }}{% endif %}</td>
+      {% endfor %}
+                </tr>
+    {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+{% endblock %}
