@@ -172,6 +172,7 @@
       // Save daily results
       $(".save-daily").click(function() {
         let data = $(this).data("shifts");
+        show_dialog('{% translate 'Save daily data' context 'Week' %}', '');
         update_shifts(data);
         setTimeout(hide_dialog, {{ delay_after_save_day }});
       });
@@ -182,14 +183,13 @@
         $(".save-daily").each(function (index, object) {
           data = data.concat($(object).data("shifts"));
         });
+        show_dialog('{% translate 'Save all data and close the week' context 'Week' %}', '');
         update_shifts(data);
         update_week();
         setTimeout(hide_dialog, {{ delay_after_save_week }});
       });
       // Update data using the modal dialog
       function update_shifts(data) {
-        $("#modal-progress-bar").css("width", "0%");
-        $("#modal-dialog").modal('show');
         let step_size_percent = 1 / data.length * 100;
         let step_width = 0;
         // Loop over each shift
@@ -273,6 +273,13 @@
         setTimeout(hide_dialog, {{ delay_after_save_week }});
       });
   {% endif %}
+      // Show the modal dialog
+      function show_dialog(title, title2) {
+        $('#modal-dialog').modal('show');
+        $("#modal-progress-bar").css("width", "0%");
+        $("#modal-result").text(title);
+        $("#modal-step-title").text(title2);
+      }
       // Hide the modal dialog
       function hide_dialog() {
         $('#modal-dialog').modal('hide');
