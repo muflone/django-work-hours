@@ -23,10 +23,15 @@
             <table class="report">
               <thead>
                 <tr>
-                  <td class="employee">{% translate 'Name' context 'Shift' %}</td>
-                  <td class="type">{% translate 'Type' context 'Report' %}</td>
+                  <td class="employee" rowspan="2">{% translate 'Name' context 'Shift' %}</td>
+                  <td class="type" rowspan="2">{% translate 'Type' context 'Report' %}</td>
     {% for day in days %}
                   <td class="date">{{ day | date:'d' }}</td>
+    {% endfor %}
+                </tr>
+                <tr>
+    {% for day in days %}
+                  <td class="date">{{ day | date:'D' }}</td>
     {% endfor %}
                 </tr>
               </thead>
