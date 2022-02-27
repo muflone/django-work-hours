@@ -23,6 +23,8 @@ from django.utils.translation import pgettext_lazy
 
 from utility.models import BaseModel, BaseModelAdmin
 
+from workhours.constants import PERMISSION_CAN_REOPEN_WEEKS
+
 
 class Week(BaseModel):
     """
@@ -53,6 +55,9 @@ class Week(BaseModel):
         ordering = ['-starting_date', '-ending_date', 'team']
         verbose_name = pgettext_lazy('Week', 'Week')
         verbose_name_plural = pgettext_lazy('Week', 'Weeks')
+        permissions = [
+            (PERMISSION_CAN_REOPEN_WEEKS, 'Can reopen weeks')
+        ]
 
     def __str__(self):
         return '{TEAM} - {START} - {END}'.format(
