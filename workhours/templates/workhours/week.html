@@ -173,8 +173,10 @@
       $(".save-daily").click(function() {
         let data = $(this).data("shifts");
         show_dialog('{% translate 'Save daily data' context 'Week' %}', '');
-        update_shifts(data);
-        setTimeout(hide_dialog, {{ delay_after_save_day }});
+        setTimeout(function() {
+          update_shifts(data);
+          setTimeout(hide_dialog, {{ delay_after_save_day }});
+        }, {{ delay_before_save_day }});
       });
       // Save weekly results (confirmation done)
       $("#confirmation-dialog-yes").click(function() {
