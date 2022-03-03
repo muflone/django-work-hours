@@ -2,3 +2,4 @@ Django==4.0.2
 django-admin-list-filter-dropdown==1.0.3
 django-bootstrap-datepicker-plus==4.0.0
 django-session-timeout==0.1.0
+xlsxwriter==3.0.3
