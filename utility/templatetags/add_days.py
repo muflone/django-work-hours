@@ -18,5 +18,21 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .add_days import add_days                                     # noqa: F401
-from .get_dictionary_value import get_dictionary_value             # noqa: F401
+import datetime
+
+from django import template
+
+
+register = template.Library()
+
+
+@register.filter
+def add_days(date: datetime.date, days: int) -> datetime.date:
+    """
+    Return a date plus a number of days
+
+    :param date: initial date
+    :param days: number of days to add to date
+    :return: the date after the specified number of days
+    """
+    return date + datetime.timedelta(days=days)
