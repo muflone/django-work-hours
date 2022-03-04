@@ -1,6 +1,7 @@
 {% extends 'workhours/reports/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load add_days %}
 {% load get_dictionary_value %}
 
 {% block header_css %}
@@ -74,7 +75,8 @@
             <h2>{% translate 'Notes' context 'Week' %}:</h2>
             <ul>
       {% endif %}
-              <li><strong>{{ date | date:date_format_full }}</strong>: {{ note }}</li>
+              <li><strong>{{ date | date:date_format_short }} -
+                {{ date | add_days:6 | date:date_format_short }}</strong>: {{ note }}</li>
       {% if forloop.last %}
             </ul>
       {% endif %}
