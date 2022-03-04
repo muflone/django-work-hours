@@ -21,13 +21,14 @@
 import datetime
 import io
 
-import xlsxwriter
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import FileResponse
 from django.utils import dateformat
 from django.utils.dateformat import format as format_date
 from django.utils.translation import pgettext, pgettext_lazy
 from django.views.generic import FormView
+
+import xlsxwriter
 
 from utility.constants import DATE_FORMAT_SHORT
 from utility.extras import get_configuration_value, iter_dates, iter_days

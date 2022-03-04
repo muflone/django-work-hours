@@ -33,7 +33,6 @@ def get_dictionary_value(dictionary: dict, key: Any) -> Any:
 
     :param dictionary: dictionary with items
     :param key: key to lookup
-    :param default: default value if missing
     :return: dictionary value by key
     """
     return dictionary.get(key)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Django Work Hours\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-04 02:08+0100\n"
+"POT-Creation-Date: 2022-03-05 00:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fabio Castelli (Muflone) <muflone@muflone.com>\n"
 "Language-Team: Italian\n"
@@ -84,24 +84,24 @@ msgid "Date"
 msgstr "Data"
 
 #: workhours/models/shift.py:46
-#: workhours/templates/workhours/reports/teams_html.html:43
+#: workhours/templates/workhours/reports/teams_html.html:44
 #: workhours/templates/workhours/week.html:128
-#: workhours/templates/workhours/week.html:142 workhours/views/reports.py:123
+#: workhours/templates/workhours/week.html:142 workhours/views/reports.py:130
 msgctxt "Shift"
 msgid "Is present"
 msgstr "È presente"
 
 #: workhours/models/shift.py:49
-#: workhours/templates/workhours/reports/teams_html.html:50
+#: workhours/templates/workhours/reports/teams_html.html:51
 #: workhours/templates/workhours/week.html:129
-#: workhours/templates/workhours/week.html:151 workhours/views/reports.py:124
+#: workhours/templates/workhours/week.html:151 workhours/views/reports.py:131
 msgctxt "Shift"
 msgid "Is holiday"
 msgstr "È in ferie"
 
 #: workhours/models/shift.py:52
-#: workhours/templates/workhours/reports/teams_html.html:64
-#: workhours/templates/workhours/week.html:130 workhours/views/reports.py:126
+#: workhours/templates/workhours/reports/teams_html.html:65
+#: workhours/templates/workhours/week.html:130 workhours/views/reports.py:133
 msgctxt "Shift"
 msgid "Permit hours"
 msgstr "Ore di permesso"
@@ -166,8 +166,10 @@ msgctxt "Week"
 msgid "Ending date"
 msgstr "Data di fine"
 
-#: workhours/models/week.py:45 workhours/templates/workhours/team.html:50
-#: workhours/templates/workhours/week.html:97
+#: workhours/models/week.py:45
+#: workhours/templates/workhours/reports/teams_html.html:75
+#: workhours/templates/workhours/team.html:50
+#: workhours/templates/workhours/week.html:97 workhours/views/reports.py:205
 msgctxt "Week"
 msgid "Notes"
 msgstr "Note"
@@ -208,7 +210,7 @@ msgctxt "Dashboard"
 msgid "My dashboard"
 msgstr "La mia bacheca"
 
-#: workhours/templates/workhours/base.html:63 workhours/views/reports.py:48
+#: workhours/templates/workhours/base.html:63 workhours/views/reports.py:51
 msgctxt "Reports"
 msgid "Reports"
 msgstr "Rapporti"
@@ -228,20 +230,20 @@ msgctxt "Reports"
 msgid "Process report"
 msgstr "Elabora rapporto"
 
-#: workhours/templates/workhours/reports/teams_html.html:26
-#: workhours/templates/workhours/week.html:127 workhours/views/reports.py:138
+#: workhours/templates/workhours/reports/teams_html.html:27
+#: workhours/templates/workhours/week.html:127 workhours/views/reports.py:145
 msgctxt "Shift"
 msgid "Name"
 msgstr "Nome"
 
-#: workhours/templates/workhours/reports/teams_html.html:27
-#: workhours/views/reports.py:147
+#: workhours/templates/workhours/reports/teams_html.html:28
+#: workhours/views/reports.py:154
 msgctxt "Reports"
 msgid "Type"
 msgstr "Tipo"
 
-#: workhours/templates/workhours/reports/teams_html.html:57
-#: workhours/views/reports.py:125
+#: workhours/templates/workhours/reports/teams_html.html:58
+#: workhours/views/reports.py:132
 msgctxt "Reports"
 msgid "Is absent"
 msgstr "È assente"
