@@ -25,10 +25,12 @@ import xlsxwriter
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import FileResponse
 from django.utils import dateformat
+from django.utils.dateformat import format as format_date
 from django.utils.translation import pgettext, pgettext_lazy
 from django.views.generic import FormView
 
-from utility.extras import iter_dates, iter_days
+from utility.constants import DATE_FORMAT_SHORT
+from utility.extras import get_configuration_value, iter_dates, iter_days
 from utility.mixins import RequireLoginMixin
 
 from workhours.constants import (PERMISSION_CAN_ACCESS_REPORTS,
@@ -188,6 +190,36 @@ class ReportsView(RequireLoginMixin,
                                            cell_format=format_center)
                     column_number += 1
                 row_number += 4
+            if notes:
+                date_format_short = get_configuration_value(
+                    name=DATE_FORMAT_SHORT,
+                    default='Y/m/d')
+                format_note = workbook.add_format({'align': 'left'})
+                format_note_title = workbook.add_format({'align': 'left',
+                                                         'bold': True})
+                row_number += 1
+                worksheet.write_string(row=row_number,
+                                       col=0,
+                                       string='{NOTES}:'.format(
+                                           NOTES=pgettext('Week', 'Notes')),
+                                       cell_format=format_note_title)
+                for date, note in notes.items():
+                    date_end_week = date + datetime.timedelta(days=6)
+                    row_number += 1
+                    notes_date = ('{DATE_1} - {DATE_2}').format(
+                        DATE_1=format_date(value=date,
+                                           format_string=date_format_short),
+                        DATE_2=format_date(value=date_end_week,
+                                           format_string=date_format_short))
+                    worksheet.write_string(
+                        row=row_number,
+                        col=0,
+                        string=notes_date,
+                        cell_format=format_note_title)
+                    worksheet.write_string(row=row_number,
+                                           col=1,
+                                           string=note,
+                                           cell_format=format_note)
         workbook.close()
         buffer.seek(0)
         return FileResponse(buffer,
