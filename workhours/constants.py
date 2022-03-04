@@ -30,3 +30,4 @@ PERMISSION_CAN_ACCESS_REPORTS = 'can_access_reports'
 PERMISSION_CAN_REOPEN_WEEKS = 'can_reopen_weeks'
 
 REPORT_TEAMS_HTML = 'teams_html'
+REPORT_TEAMS_XLS = 'teams_xls'

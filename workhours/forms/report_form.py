@@ -25,13 +25,15 @@ from django.utils.translation import pgettext_lazy
 
 from bootstrap_datepicker_plus.widgets import DatePickerInput
 
-from workhours.constants import REPORT_TEAMS_HTML
+from workhours.constants import REPORT_TEAMS_HTML, REPORT_TEAMS_XLS
 
 
 class ReportForm(forms.Form):
     report_type = forms.ChoiceField(
         choices=[(REPORT_TEAMS_HTML,
                   pgettext_lazy('Reports', 'Teams in HTML')),
+                 (REPORT_TEAMS_XLS,
+                  pgettext_lazy('Reports', 'Teams in Excel')),
                  ],
         required=True,
         label=pgettext_lazy('Reports', 'Report type'),
