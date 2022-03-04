@@ -69,6 +69,16 @@
     {% endfor %}
               </tbody>
             </table>
+    {% for date, note in team_data.3.items %}
+      {% if forloop.first %}
+            <h2>{% translate 'Notes' context 'Week' %}:</h2>
+            <ul>
+      {% endif %}
+              <li><strong>{{ date | date:date_format_full }}</strong>: {{ note }}</li>
+      {% if forloop.last %}
+            </ul>
+      {% endif %}
+    {% endfor %}
           </div>
         </div>
       </div>

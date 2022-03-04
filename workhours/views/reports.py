@@ -79,6 +79,7 @@ class ReportsView(RequireLoginMixin,
         results = []
         for team in Team.objects.order_by('name'):
             data = {}
+            notes = {}
             for employee in team.employees.all():
                 data[employee.pk] = [None
                                      for _
@@ -86,12 +87,15 @@ class ReportsView(RequireLoginMixin,
             shifts = Shift.objects.filter(week__team=team.pk,
                                           date__gte=starting_date,
                                           date__lte=ending_date)
-            for shift in shifts:
+            for shift in shifts.select_related('week').order_by('date'):
                 # Get relative day
                 day = (shift.date - starting_date).days
                 # Save shift data
                 data[shift.employee_id][day] = shift
-            results.append((team.pk, team.name, data))
+                # Save notes
+                if shift.week.notes:
+                    notes[shift.week.starting_date] = shift.week.notes
+            results.append((team.pk, team.name, data, notes))
         return {'days': [day
                          for day
                          in iter_dates(starting_date, ending_date)],
@@ -124,7 +128,7 @@ class ReportsView(RequireLoginMixin,
                         pgettext('Shift', 'Is holiday'),
                         pgettext('Reports', 'Is absent'),
                         pgettext('Shift', 'Permit hours'))
-        for team_id, team_name, data in results['results']:
+        for team_id, team_name, data, notes in results['results']:
             # Add new sheet
             worksheet = workbook.add_worksheet(name=team_name)
             # Format headers
