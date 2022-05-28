@@ -83,13 +83,20 @@ class ReportsView(RequireLoginMixin,
         for team in Team.objects.order_by('name'):
             data = {}
             notes = {}
-            for employee in team.employees.all():
-                data[employee.pk] = [None
-                                     for _
-                                     in iter_days(starting_date, ending_date)]
             shifts = Shift.objects.filter(week__team=team.pk,
                                           date__gte=starting_date,
                                           date__lte=ending_date)
+            # Get all the employees from the shifts and the teams
+            employees = set()
+            for employee in team.employees.all():
+                employees.add(employee.pk)
+            for shift in shifts.order_by().values('employee').distinct():
+                employees.add(shift['employee'])
+            # Get all days for each employee
+            for employee in employees:
+                data[employee] = [None
+                                  for _
+                                  in iter_days(starting_date, ending_date)]
             for shift in shifts.select_related('week').order_by('date'):
                 # Get relative day
                 day = (shift.date - starting_date).days
