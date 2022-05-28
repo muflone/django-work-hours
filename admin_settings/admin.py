@@ -49,7 +49,7 @@ for model_name, model in admin_models.items():
     # Customize list_display
     try:
         if records := ListDisplay.objects.filter(
-                model=model_name, enabled=True).order_by('order'):
+                model=model_name, is_active=True).order_by('order'):
             # Add the fields to model list_display
             model.list_display = []
             for item in records:
@@ -62,7 +62,7 @@ for model_name, model in admin_models.items():
     # Customize list_display_links
     try:
         if records := ListDisplayLink.objects.filter(
-                model=model_name, enabled=True).order_by('order'):
+                model=model_name, is_active=True).order_by('order'):
             # Add the fields to model list_display
             model.list_display_links = []
             for item in records:
@@ -73,7 +73,7 @@ for model_name, model in admin_models.items():
     # Customize list_filter
     try:
         if records := ListFilter.objects.filter(
-                model=model_name, enabled=True).order_by('order'):
+                model=model_name, is_active=True).order_by('order'):
             # Add the fields to model list_display
             model.list_filter = []
             for item in records:

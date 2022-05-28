@@ -21,6 +21,7 @@
 from django.db import models
 
 from utility.extras import get_admin_models
+from utility.managers import ManagerIsActive
 from utility.models.base import BaseModel, BaseModelAdmin
 from django.utils.translation import pgettext_lazy
 
@@ -40,9 +41,12 @@ class ListDisplayLink(BaseModel):
         verbose_name=pgettext_lazy('ListDisplayLink', 'field'))
     order = models.PositiveIntegerField(
         verbose_name=pgettext_lazy('ListDisplayLink', 'order'))
-    enabled = models.BooleanField(
+    is_active = models.BooleanField(
         default=True,
-        verbose_name=pgettext_lazy('ListDisplayLink', 'enabled'))
+        verbose_name=pgettext_lazy('ListDisplayLink', 'is_active'))
+
+    objects = models.Manager()
+    objects_active = ManagerIsActive()
 
     class Meta:
         # Define the database table
@@ -60,4 +64,5 @@ class ListDisplayLink(BaseModel):
 
 
 class ListDisplayLinkAdmin(BaseModelAdmin):
-    pass
+    list_display = ('__str__', 'is_active')
+    list_filter = ('is_active', )
