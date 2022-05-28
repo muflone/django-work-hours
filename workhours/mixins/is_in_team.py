@@ -39,14 +39,14 @@ class IsInTeamUserMixin(UserPassesTestMixin):
         result = False
         if issubclass(self.model, Team):
             # Check team
-            object = self.model.objects.get(pk=object_id)
-            result = self.request.user in object.managers.all()
+            record = self.model.objects.get(pk=object_id)
+            result = self.request.user in record.managers.all()
         elif issubclass(self.model, Week):
             # Check week
-            object = self.model.objects.get(pk=object_id)
-            result = self.request.user in object.team.managers.all()
+            record = self.model.objects.get(pk=object_id)
+            result = self.request.user in record.team.managers.all()
         elif issubclass(self.model, Shift):
             # Check shift
-            object = self.model.objects.get(pk=object_id)
-            result = self.request.user in object.week.team.managers.all()
+            record = self.model.objects.get(pk=object_id)
+            result = self.request.user in record.week.team.managers.all()
         return result

@@ -66,6 +66,8 @@ class ReportsView(RequireLoginMixin,
         elif report_type == REPORT_TEAMS_XLS:
             response = self.report_teams_xls(starting_date=starting_date,
                                              ending_date=ending_date)
+        else:
+            response = None
         return response
 
     def get_template_names(self):
@@ -214,7 +216,7 @@ class ReportsView(RequireLoginMixin,
                 for date, note in notes.items():
                     date_end_week = date + datetime.timedelta(days=6)
                     row_number += 1
-                    notes_date = ('{DATE_1} - {DATE_2}').format(
+                    notes_date = '{DATE_1} - {DATE_2}'.format(
                         DATE_1=format_date(value=date,
                                            format_string=date_format_short),
                         DATE_2=format_date(value=date_end_week,
