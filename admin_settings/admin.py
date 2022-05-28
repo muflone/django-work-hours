@@ -53,9 +53,7 @@ for model_name, model in admin_models.items():
             # Add the fields to model list_display
             model.list_display = []
             for item in records:
-                # Include only existing models
-                if item.model in admin_models:
-                    model.list_display.append(item.field)
+                model.list_display.append(item.field)
     except OperationalError:
         # If the model doesn't yet exist skip the customization
         pass
