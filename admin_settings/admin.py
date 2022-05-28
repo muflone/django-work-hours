@@ -19,12 +19,17 @@
 ##
 
 from django.contrib import admin
+from django.db.utils import OperationalError
 
 from utility.constants import (ADMIN_INDEX_TITLE,
                                ADMIN_SITE_HEADER,
                                ADMIN_SITE_TITLE)
-from utility.extras import get_configuration_value
+from utility.extras import get_admin_models, get_configuration_value
+from .models import ListDisplay, ListDisplayAdmin
 
+
+# Models registration
+admin.site.register(ListDisplay, ListDisplayAdmin)
 
 # Admin customization
 if setting := get_configuration_value(ADMIN_SITE_HEADER):
@@ -33,3 +38,20 @@ if setting := get_configuration_value(ADMIN_SITE_TITLE):
     admin.site.site_title = setting
 if setting := get_configuration_value(ADMIN_INDEX_TITLE):
     admin.site.index_title = setting
+
+# Customize Admin models
+admin_models = get_admin_models()
+for model_name, model in admin_models.items():
+    # Customize list_display
+    try:
+        if records := ListDisplay.objects.filter(
+                model=model_name, enabled=True).order_by('order'):
+            # Add the fields to model list_display
+            model.list_display = []
+            for item in records:
+                # Include only existing models
+                if item.model in admin_models:
+                    model.list_display.append(item.field)
+    except OperationalError:
+        # If the model doesn't yet exist skip the customization
+        pass
