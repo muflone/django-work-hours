@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # Third party applications
     'django_admin_listfilter_dropdown',
     'bootstrap_datepicker_plus',
+    'logentry_admin',
     # Django applications
     'django.contrib.admin',
     'django.contrib.auth',
