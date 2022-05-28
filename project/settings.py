@@ -132,4 +132,5 @@ SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 
 # Admin Models list with a field referencing other models in its choices
 ADMIN_MODELS_REFERENCING_MODELS_WITH_CHOICES = ('ListDisplayAdmin',
-                                                'ListDisplayLinkAdmin')
+                                                'ListDisplayLinkAdmin',
+                                                'ListFilterAdmin')

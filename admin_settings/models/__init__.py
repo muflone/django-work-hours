@@ -21,3 +21,4 @@
 from .list_display import ListDisplay, ListDisplayAdmin            # noqa: F401
 from .list_display_link import (ListDisplayLink,                   # noqa: F401
                                 ListDisplayLinkAdmin)              # noqa: F401
+from .list_filter import ListFilter, ListFilterAdmin               # noqa: F401

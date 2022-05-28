@@ -26,12 +26,14 @@ from utility.constants import (ADMIN_INDEX_TITLE,
                                ADMIN_SITE_TITLE)
 from utility.extras import get_admin_models, get_configuration_value
 from .models import (ListDisplay, ListDisplayAdmin,
-                     ListDisplayLink, ListDisplayLinkAdmin)
+                     ListDisplayLink, ListDisplayLinkAdmin,
+                     ListFilter, ListFilterAdmin)
 
 
 # Models registration
 admin.site.register(ListDisplay, ListDisplayAdmin)
 admin.site.register(ListDisplayLink, ListDisplayLinkAdmin)
+admin.site.register(ListFilter, ListFilterAdmin)
 
 # Admin customization
 if setting := get_configuration_value(ADMIN_SITE_HEADER):
@@ -65,6 +67,17 @@ for model_name, model in admin_models.items():
             model.list_display_links = []
             for item in records:
                 model.list_display_links.append(item.field)
+    except OperationalError:
+        # If the model doesn't yet exist skip the customization
+        pass
+    # Customize list_filter
+    try:
+        if records := ListFilter.objects.filter(
+                model=model_name, enabled=True).order_by('order'):
+            # Add the fields to model list_display
+            model.list_filter = []
+            for item in records:
+                model.list_filter.append(item.field)
     except OperationalError:
         # If the model doesn't yet exist skip the customization
         pass
