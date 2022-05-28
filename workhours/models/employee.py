@@ -21,8 +21,27 @@
 from django.db import models
 from django.utils.translation import pgettext_lazy
 
+from admin_settings.text_input_filter import TextInputFilter
 from utility.managers import ManagerIsActive
 from utility.models import BaseModel, BaseModelAdmin
+
+
+class EmployeeFirstNameFilter(TextInputFilter):
+    parameter_name = 'first_name'
+    title = pgettext_lazy('Employee', 'First name')
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(first_name__icontains=self.value())
+
+
+class EmployeeLastNameFilter(TextInputFilter):
+    parameter_name = 'last_name'
+    title = pgettext_lazy('Employee', 'Last name')
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(last_name__icontains=self.value())
 
 
 class Employee(BaseModel):
