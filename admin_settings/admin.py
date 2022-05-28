@@ -21,10 +21,11 @@
 from django.contrib import admin
 from django.db.utils import OperationalError
 
+from admin_settings.extras import get_admin_models
 from utility.constants import (ADMIN_INDEX_TITLE,
                                ADMIN_SITE_HEADER,
                                ADMIN_SITE_TITLE)
-from utility.extras import get_admin_models, get_configuration_value
+from utility.extras import get_configuration_value
 from .models import (ListDisplay, ListDisplayAdmin,
                      ListDisplayLink, ListDisplayLinkAdmin,
                      ListFilter, ListFilterAdmin)

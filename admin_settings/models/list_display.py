@@ -21,7 +21,7 @@
 from django.db import models
 from django.utils.translation import pgettext_lazy
 
-from utility.extras import get_admin_models
+from admin_settings.extras import get_admin_models
 from utility.managers import ManagerIsActive
 from utility.models.base import BaseModel, BaseModelAdmin
 
