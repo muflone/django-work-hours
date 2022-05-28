@@ -36,6 +36,7 @@ The Python dependencies for the server part are listed in the
 * Django 4.0.x (https://pypi.org/project/Django/)
 * Django Admin List Filter Dropdown (https://pypi.org/project/django-admin-list-filter-dropdown/)
 * Django Bootstrap Date-Picker Plus (https://pypi.org/project/django-bootstrap-datepicker-plus/)
+* Django LogEntry Admin (https://pypi.org/project/django-logentry-admin/)
 * Django Session Timeout (https://pypi.org/project/django-session-timeout/)
 * XlsxWriter (https://pypi.org/project/XlsxWriter/)
 
