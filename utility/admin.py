@@ -26,9 +26,7 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy
 from django.utils.translation import pgettext_lazy
 
-from .constants import ADMIN_INDEX_TITLE, ADMIN_SITE_HEADER, ADMIN_SITE_TITLE
 from .models import Configuration, ConfigurationAdmin, User
-from .extras import get_configuration_value
 
 
 class UserCreationForm(forms.ModelForm):
@@ -132,11 +130,3 @@ class CustomUserAdmin(UserAdmin):
 # Models registration
 admin.site.register(Configuration, ConfigurationAdmin)
 admin.site.register(User, CustomUserAdmin)
-
-# Admin customization
-if setting := get_configuration_value(ADMIN_SITE_HEADER):
-    admin.site.site_header = setting
-if setting := get_configuration_value(ADMIN_SITE_TITLE):
-    admin.site.site_title = setting
-if setting := get_configuration_value(ADMIN_INDEX_TITLE):
-    admin.site.index_title = setting

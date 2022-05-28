@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 INSTALLED_APPS = [
     # Local applications
+    'admin_settings.apps.AdminSettingsConfig',
     'workhours.apps.WorkhoursConfig',
     'utility.apps.UtilityConfig',
     # Third party applications
@@ -130,4 +131,4 @@ SESSION_EXPIRE_SECONDS = 7200
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 
 # Admin Models list with a field referencing other models in its choices
-ADMIN_MODELS_REFERENCING_MODELS_WITH_CHOICES = ()
+ADMIN_MODELS_REFERENCING_MODELS_WITH_CHOICES = ('ListDisplayAdmin', )
