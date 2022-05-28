@@ -79,13 +79,23 @@ for model_name, model in admin_models.items():
             model.list_filter = []
             for item in records:
                 if item.is_active:
-                    if '.' in item.field:
+                    if '|' in item.field:
+                        # The filter contains multiple fields
+                        # e.g. date|rangefilter.filter.DateRangeFilter
+                        new_fields = []
+                        fields = item.field.split('|')
+                        for field in fields:
+                            if '.' in field:
+                                # The filter contain a module.class field
+                                field = get_class_from_module(field)
+                            new_fields.append(field)
+                    elif '.' in item.field:
                         # The filter contain a module.class field
-                        field = get_class_from_module(item.field)
+                        new_fields = get_class_from_module(item.field)
                     else:
                         # The filter is a string filter
-                        field = item.field
-                    model.list_filter.append(field)
+                        new_fields = item.field
+                    model.list_filter.append(new_fields)
     except OperationalError:
         # If the model doesn't yet exist skip the customization
         pass

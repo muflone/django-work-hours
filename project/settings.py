@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django_admin_listfilter_dropdown',
     'bootstrap_datepicker_plus',
     'logentry_admin',
+    'rangefilter',
     # Django applications
     'django.contrib.admin',
     'django.contrib.auth',
