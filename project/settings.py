@@ -128,3 +128,6 @@ LOGIN_URL = '/'
 # Sessions expire after 2 hours after last activity
 SESSION_EXPIRE_SECONDS = 7200
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+
+# Admin Models list with a field referencing other models in its choices
+ADMIN_MODELS_REFERENCING_MODELS_WITH_CHOICES = ()
