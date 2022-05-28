@@ -21,7 +21,7 @@
 from django.db import models
 from django.utils.translation import pgettext_lazy
 
-from .base_model import BaseModel, BaseModelAdmin
+from .base import BaseModel, BaseModelAdmin
 
 
 class Configuration(BaseModel):

@@ -18,6 +18,6 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .base_model import BaseModel, BaseModelAdmin                  # noqa: F401
+from .base import BaseModel, BaseModelAdmin                        # noqa: F401
 from .configuration import Configuration, ConfigurationAdmin       # noqa: F401
 from .user import User                                             # noqa: F401
