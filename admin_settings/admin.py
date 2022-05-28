@@ -21,7 +21,7 @@
 from django.contrib import admin
 from django.db.utils import OperationalError
 
-from admin_settings.extras import get_admin_models
+from admin_settings.extras import get_admin_models, get_class_from_module
 from utility.constants import (ADMIN_INDEX_TITLE,
                                ADMIN_SITE_HEADER,
                                ADMIN_SITE_TITLE)
@@ -79,7 +79,13 @@ for model_name, model in admin_models.items():
             model.list_filter = []
             for item in records:
                 if item.is_active:
-                    model.list_filter.append(item.field)
+                    if '.' in item.field:
+                        # The filter contain a module.class field
+                        field = get_class_from_module(item.field)
+                    else:
+                        # The filter is a string filter
+                        field = item.field
+                    model.list_filter.append(field)
     except OperationalError:
         # If the model doesn't yet exist skip the customization
         pass
