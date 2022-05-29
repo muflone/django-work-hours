@@ -19,7 +19,7 @@
 ##
 
 from django.contrib import admin
-from django.db.utils import OperationalError
+from django.db.utils import OperationalError, ProgrammingError
 
 from admin_settings.extras import get_admin_models, get_class_from_module
 from utility.constants import (ADMIN_INDEX_TITLE,
@@ -56,7 +56,7 @@ for model_name, model in admin_models.items():
             for item in records:
                 if item.is_active:
                     model.list_display.append(item.field)
-    except OperationalError:
+    except (OperationalError, ProgrammingError):
         # If the model doesn't yet exist skip the customization
         pass
     # Customize list_display_links
@@ -68,7 +68,7 @@ for model_name, model in admin_models.items():
             for item in records:
                 if item.is_active:
                     model.list_display_links.append(item.field)
-    except OperationalError:
+    except (OperationalError, ProgrammingError):
         # If the model doesn't yet exist skip the customization
         pass
     # Customize list_filter
@@ -96,6 +96,6 @@ for model_name, model in admin_models.items():
                         # The filter is a string filter
                         new_fields = item.field
                     model.list_filter.append(new_fields)
-    except OperationalError:
+    except (OperationalError, ProgrammingError):
         # If the model doesn't yet exist skip the customization
         pass
