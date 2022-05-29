@@ -20,9 +20,9 @@
             <input type="hidden" name="{{ k }}" value="{{ v }}" />
             {% endfor %}
 
-            <input  type="text"
-                    value="{{ spec.value|default_if_none:'' }}"
-                    name="{{ spec.parameter_name }}"/>
+            <input type="text"
+                   value="{{ spec.value|default_if_none:'' }}"
+                   name="{{ spec.parameter_name }}"/>
 
             {% if not all_choice.selected %}
                 <strong><a href="{{ all_choice.query_string }}">x {% trans 'Remove' context 'Utility' %}</a></strong>
