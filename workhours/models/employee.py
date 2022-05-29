@@ -76,7 +76,13 @@ class Employee(BaseModel):
         verbose_name_plural = pgettext_lazy('Employee', 'Employees')
 
     def __str__(self):
+        return self.first_last()
+
+    def first_last(self):
         return f'{self.first_name} {self.last_name}'
+
+    def last_first(self):
+        return f'{self.last_name} {self.first_name}'
 
 
 class EmployeeAdmin(BaseModelAdmin):

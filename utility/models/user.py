@@ -49,11 +49,20 @@ class User(BaseModel,
         blank=True,
         null=False,
         verbose_name=pgettext_lazy('User', 'Redirect page after login'))
+    first_last = models.BooleanField(
+        choices=((True, pgettext_lazy('User', 'Show first name + last name')),
+                 (False, pgettext_lazy('User', 'Show last name + first name')),
+                 ),
+        default=True,
+        null=False,
+        verbose_name=pgettext_lazy('User', 'First and last name order'))
     # Remove the username field with unique constraint
     username = None
+
     # Set the user manager
     objects = ManagerUser()
     objects_active = ManagerIsActive()
+
     # Set properties
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']

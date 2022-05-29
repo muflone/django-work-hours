@@ -77,7 +77,7 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email', 'password', 'first_name', 'last_name',
-                  'login_redirect_page',
+                  'login_redirect_page', 'first_last',
                   'is_active', 'is_superuser', 'is_staff')
 
     def clean_password(self):
@@ -106,7 +106,8 @@ class CustomUserAdmin(UserAdmin):
                            'password')}),
         ('Details', {'fields': ('date_joined',
                                 'last_login',
-                                'login_redirect_page')}),
+                                'login_redirect_page',
+                                'first_last')}),
         ('Status', {'fields': ('is_active',
                                'is_superuser',
                                'is_staff')}),

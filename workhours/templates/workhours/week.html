@@ -132,7 +132,13 @@
     {% for shift in day.2 %}
             <div class="row card-row {% if forloop.counter|divisibleby:2 %}card-row-alternate{% endif %}">
               <div class="col-sm-3 shift-employee-name" id="employee-{{ shift.pk }}"
-                data-date="{{ day.1 | date:date_format_full }}">{{ shift.employee }}</div>
+                data-date="{{ day.1 | date:date_format_full }}">
+      {% if user.first_last %}
+                {{ shift.employee.first_last }}
+      {% else %}
+                {{ shift.employee.last_first }}
+      {% endif %}
+              </div>
               <div class="col-sm-2">
                 <label>
                   <input class="zoom-x15" type="checkbox"

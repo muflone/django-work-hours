@@ -82,6 +82,11 @@ class ReportsView(RequireLoginMixin,
                           starting_date: datetime.date,
                           ending_date: datetime.date) -> dict:
         results = []
+        employees = {employee.id: (employee.first_last()
+                                   if self.request.user.first_last
+                                   else employee.last_first())
+                     for employee
+                     in Employee.objects.all()}
         for team in Team.objects.order_by('name'):
             data = {}
             notes = {}
@@ -89,13 +94,18 @@ class ReportsView(RequireLoginMixin,
                                           date__gte=starting_date,
                                           date__lte=ending_date)
             # Get all the employees from the shifts and the teams
-            employees = set()
+            employee_ids = set()
             for employee in team.employees.all():
-                employees.add(employee.pk)
+                employee_ids.add(employee.pk)
             for shift in shifts.order_by().values('employee').distinct():
-                employees.add(shift['employee'])
+                employee_ids.add(shift['employee'])
+            # Order employees by their names
+            employee_ids = [k for k, v
+                            in sorted(employees.items(),
+                                      key=lambda item: item[1])
+                            if k in employee_ids]
             # Get all days for each employee
-            for employee in employees:
+            for employee in employee_ids:
                 data[employee] = [None
                                   for _
                                   in iter_days(starting_date, ending_date)]
@@ -111,9 +121,7 @@ class ReportsView(RequireLoginMixin,
         return {'days': [day
                          for day
                          in iter_dates(starting_date, ending_date)],
-                'employees': {employee.id: str(employee)
-                              for employee
-                              in Employee.objects.all()},
+                'employees': employees,
                 'results': results}
 
     def report_teams_xls(self,

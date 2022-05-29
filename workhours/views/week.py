@@ -71,7 +71,10 @@ class WeekView(RequireLoginMixin,
         )
         # Get the team employees
         team = Team.objects_active.get(pk=self.object.team_id)
-        employees = team.employees.order_by('first_name', 'last_name')
+        employees = team.employees.order_by(*(
+            ('first_name', 'last_name')
+            if self.request.user.first_last
+            else ('last_name', 'first_name')))
         # Get the days details
         days = []
         shifts_all_qs = Shift.objects.select_related('employee')
