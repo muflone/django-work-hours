@@ -34,6 +34,7 @@ class Team(BaseModel):
         max_length=255,
         blank=False,
         null=False,
+        unique=True,
         verbose_name=pgettext_lazy('Team', 'Name'))
     description = models.TextField(
         blank=True,
