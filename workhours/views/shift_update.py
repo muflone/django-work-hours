@@ -54,7 +54,8 @@ class ShiftUpdateView(RequireLoginMixin,
     def post(self, request, *args, **kwargs):
         form = super().get_form(form_class=self.form_class)
         if form.is_valid():
-            shift = Shift.objects.get(pk=form.cleaned_data['pk'])
+            shift = Shift.objects.select_related('week', 'week__team').get(
+                pk=form.cleaned_data['pk'])
             if not shift.week.is_closed:
                 shift.is_present = form.cleaned_data.get('present', False)
                 shift.is_holiday = form.cleaned_data.get('holiday', False)
