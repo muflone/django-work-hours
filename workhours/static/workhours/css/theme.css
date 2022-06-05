@@ -4,7 +4,6 @@
 
 .form-control:disabled,
 .form-control[readonly]{
-  background-color: lightgrey;
   opacity: 0.9;
 }
 
