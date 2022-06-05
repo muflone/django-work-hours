@@ -1,6 +1,7 @@
 {% extends 'workhours/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load get_queryset_row %}
 {% load split_extra_values %}
 
 {% block body_header1_pre_title %}
@@ -170,6 +171,7 @@
       {% if extras %}
               <div class="col-sm-3">
         {% for extra in extras %}
+          {% get_queryset_row shift.extras.all 'extra_id' extra.pk as shift_extra %}
                 <div>
           {# Text #}
           {% if extra.type == 0 %}
@@ -178,20 +180,23 @@
                   {% if object.is_closed %} disabled{% endif %}
                   name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}"
                   minlength="{{ extra.minimum }}" {% if extra.maximum > 0 %} maxlength="{{ extra.maximum }}"{% endif %}
-                  placeholder="{{ extra.values }}">
+                  placeholder="{{ extra.values }}"
+                  value="{{ shift_extra.value }}">
           {# Number #}
           {% elif extra.type == 1 %}
                 <label for="extra-{{ shift.pk }}-{{ extra.pk }}">{{ extra.description }}</label>
                 <input class="form-control" type="number"
                   {% if object.is_closed %} disabled{% endif %}
                   name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}"
-                  min="{{ extra.minimum }}" max="{{ extra.maximum }}">
+                  min="{{ extra.minimum }}" max="{{ extra.maximum }}"
+                  value="{{ shift_extra.value }}">
           {# Checkbox on the left #}
           {% elif extra.type == 2 %}
                 <div class="mt-3 mb-3" >
                   <input class="zoom-x15" type="checkbox"
                     {% if object.is_closed %} disabled{% endif %}
-                    name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}">
+                    name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}"
+                    {% if shift_extra.value == '1' %} checked{% endif %}>
                   &nbsp;
                   <label for="extra-{{ shift.pk }}-{{ extra.pk }}">{{ extra.description }}</label>
                 </div>
@@ -202,7 +207,8 @@
                   &nbsp;
                   <input class="zoom-x15" type="checkbox"
                     {% if object.is_closed %} disabled{% endif %}
-                    name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}">
+                    name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}"
+                    {% if shift_extra.value == '1' %} checked{% endif %}>
                 </div>
           {# Select #}
           {% elif extra.type == 4 %}
@@ -213,7 +219,7 @@
             {# Split Extra values #}
             {% with extra.values|split_extra_values as values %}
               {% for value in values %}
-                  <option value="{{ value.0 }}">{{ value.1 }}</option>
+                  <option value="{{ value.0 }}"{% if shift_extra.value == value.0 %} selected{% endif %}>{{ value.1 }}</option>
               {% endfor %}
             {% endwith %}
                 </select>

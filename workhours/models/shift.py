@@ -50,6 +50,9 @@ class Shift(BaseModel):
     permit_hours = models.PositiveSmallIntegerField(
         default=0,
         verbose_name=pgettext_lazy('Shift', 'Permit hours'))
+    extras = models.ManyToManyField(
+        to='ShiftExtra',
+        related_name='shift_extras')
 
     class Meta:
         constraints = [

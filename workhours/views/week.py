@@ -80,18 +80,31 @@ class WeekView(RequireLoginMixin,
         # Get the days details
         days = []
         shifts_all_qs = Shift.objects.select_related('employee')
+        if context['extras']:
+            # If the team has extras enabled, prefetch the extras
+            shifts_all_qs = shifts_all_qs.prefetch_related('extras')
         for day_number in range(7):
             day = (self.object.starting_date +
                    datetime.timedelta(days=day_number))
             shifts = []
             shifts_ids = []
+            shifts_extras = []
             for employee in employees:
                 shift, _ = shifts_all_qs.get_or_create(week=self.object,
                                                        employee=employee,
                                                        date=day)
+
+                if context['extras']:
+                    shift_extras = {item[0]: item[1]
+                                    for item
+                                    in shift.extras.values_list('extra__name',
+                                                                'value')}
+                else:
+                    shift_extras = None
                 shifts.append(shift)
                 shifts_ids.append(shift.pk)
-            days.append((day_number, day, shifts, shifts_ids))
+                shifts_extras.append(shift_extras)
+            days.append((day_number, day, shifts, shifts_ids, shifts_extras))
         context['days'] = days
         context['week_status'] = (pgettext_lazy('Week', 'Closed')
                                   if self.object.is_closed

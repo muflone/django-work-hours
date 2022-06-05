@@ -31,7 +31,7 @@ from utility.mixins import RequireLoginMixin
 
 from workhours.constants import DELAY_AFTER_SAVE_SHIFT
 from workhours.mixins import IsInTeamUserMixin
-from workhours.models import Shift
+from workhours.models import Shift, ShiftExtra
 
 
 class ShiftUpdateForm(forms.ModelForm):
@@ -59,6 +59,27 @@ class ShiftUpdateView(RequireLoginMixin,
                 shift.is_present = form.cleaned_data.get('present', False)
                 shift.is_holiday = form.cleaned_data.get('holiday', False)
                 shift.permit_hours = form.cleaned_data.get('permit', 0)
+                # Get the extras
+                extras = shift.week.team.extras.filter(is_active=True).all()
+                for extra in extras:
+                    extra_value = form.data[f'extra_{extra.pk}']
+                    if extra.type in (extra.EXTRA_TYPE_CHECK_LEFT,
+                                      extra.EXTRA_TYPE_CHECK_RIGHT):
+                        # Apply 1 or 0 for Checkbox values
+                        extra_value = ('1'
+                                       if extra_value in ('true', '1')
+                                       else '0')
+                    # Create a new Shift Extra or get any existing
+                    shift_extra, created = ShiftExtra.objects.get_or_create(
+                        shift=shift,
+                        extra=extra,
+                        defaults={'value': extra_value}
+                    )
+                    if not created and shift_extra.value != extra_value:
+                        # Update existing Shift Extra
+                        shift_extra.value = extra_value
+                        shift_extra.save()
+                    shift.extras.add(shift_extra)
                 shift.save()
                 # Apply a delay after saving a shift
                 time.sleep(get_configuration_int(name=DELAY_AFTER_SAVE_SHIFT,
