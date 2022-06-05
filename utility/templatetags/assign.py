@@ -18,8 +18,19 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .add_days import add_days                                     # noqa: F401
-from .assign import assign                                         # noqa: F401
-from .get_dictionary_value import get_dictionary_value             # noqa: F401
-from .get_queryset_row import get_queryset_row                     # noqa: F401
-from .split_extra_values import split_extra_values                 # noqa: F401
+from typing import Any
+
+from django import template
+
+
+register = template.Library()
+
+
+@register.simple_tag
+def assign(value: Any) -> Any:
+    """
+    Return the passed value
+
+    :return: passed value
+    """
+    return value
