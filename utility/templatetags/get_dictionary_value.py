@@ -35,4 +35,4 @@ def get_dictionary_value(dictionary: dict, key: Any) -> Any:
     :param key: key to lookup
     :return: dictionary value by key
     """
-    return dictionary.get(key)
+    return dictionary.get(key) if dictionary else None
