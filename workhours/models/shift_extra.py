@@ -23,8 +23,6 @@ from django.utils.translation import pgettext_lazy
 
 from utility.models import BaseModel, BaseModelAdmin
 
-from workhours.constants import PERMISSION_CAN_ACCESS_REPORTS
-
 
 class ShiftExtra(BaseModel):
     """

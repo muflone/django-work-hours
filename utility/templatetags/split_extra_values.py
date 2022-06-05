@@ -18,8 +18,6 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from typing import Any
-
 from django import template
 
 
@@ -34,5 +32,4 @@ def split_extra_values(value: str) -> list[list[str, str]]:
     :param value: Extra value to split
     :return: list of tuples with (option, value)
     """
-    print(repr(value))
     return [item.replace('\r', '').split(',', 1) for item in value.split('\n')]

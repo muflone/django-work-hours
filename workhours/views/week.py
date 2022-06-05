@@ -75,6 +75,8 @@ class WeekView(RequireLoginMixin,
             ('first_name', 'last_name')
             if self.request.user.first_last
             else ('last_name', 'first_name')))
+        # Check Extras enabled for the team
+        context['extras'] = team.extras.filter(is_active=True)
         # Get the days details
         days = []
         shifts_all_qs = Shift.objects.select_related('employee')
@@ -90,7 +92,6 @@ class WeekView(RequireLoginMixin,
                 shifts.append(shift)
                 shifts_ids.append(shift.pk)
             days.append((day_number, day, shifts, shifts_ids))
-        context['extras'] = team.extras.filter(is_active=True)
         context['days'] = days
         context['week_status'] = (pgettext_lazy('Week', 'Closed')
                                   if self.object.is_closed
