@@ -51,6 +51,10 @@ class Team(BaseModel):
         to=get_user_model(),
         blank=True,
         verbose_name=pgettext_lazy('Team', 'Managers'))
+    extras = models.ManyToManyField(
+        to='Extra',
+        blank=True,
+        verbose_name=pgettext_lazy('Team', 'Extras'))
 
     # Automatically filter on the enabled only records
     objects = models.Manager()

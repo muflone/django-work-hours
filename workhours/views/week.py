@@ -90,6 +90,7 @@ class WeekView(RequireLoginMixin,
                 shifts.append(shift)
                 shifts_ids.append(shift.pk)
             days.append((day_number, day, shifts, shifts_ids))
+        context['extras'] = team.extras.filter(is_active=True)
         context['days'] = days
         context['week_status'] = (pgettext_lazy('Week', 'Closed')
                                   if self.object.is_closed

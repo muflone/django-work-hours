@@ -18,6 +18,21 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .add_days import add_days                                     # noqa: F401
-from .get_dictionary_value import get_dictionary_value             # noqa: F401
-from .split_extra_values import split_extra_values                 # noqa: F401
+from typing import Any
+
+from django import template
+
+
+register = template.Library()
+
+
+@register.filter
+def split_extra_values(value: str) -> list[list[str, str]]:
+    """
+    Split an Extra values in a list of values pair [(option, value), (...)]
+
+    :param value: Extra value to split
+    :return: list of tuples with (option, value)
+    """
+    print(repr(value))
+    return [item.replace('\r', '').split(',', 1) for item in value.split('\n')]

@@ -1,6 +1,7 @@
 {% extends 'workhours/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load split_extra_values %}
 
 {% block body_header1_pre_title %}
                   <!-- Pre title -->
@@ -128,6 +129,9 @@
               <div class="col-sm-2">{% translate 'Is present' context 'Shift' %}</div>
               <div class="col-sm-2">{% translate 'Is holiday' context 'Shift' %}</div>
               <div class="col-sm-2">{% translate 'Permit hours' context 'Shift' %}</div>
+    {% if extras %}
+              <div class="col-sm-2">{% translate 'Extras' context 'Shift' %}</div>
+    {% endif %}
             </div>
     {% for shift in day.2 %}
             <div class="row card-row {% if forloop.counter|divisibleby:2 %}card-row-alternate{% endif %}">
@@ -163,6 +167,61 @@
                   {% if object.is_closed %} disabled{% endif %}
                   id="permit-{{ shift.pk }}">
               </div>
+      {% if extras %}
+              <div class="col-sm-3">
+        {% for extra in extras %}
+                <div>
+          {# Text #}
+          {% if extra.type == 0 %}
+                <label for="extra-{{ shift.pk }}-{{ extra.pk }}">{{ extra.description }}</label>
+                <input class="form-control" type="text"
+                  {% if object.is_closed %} disabled{% endif %}
+                  name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}"
+                  minlength="{{ extra.minimum }}" {% if extra.maximum > 0 %} maxlength="{{ extra.maximum }}"{% endif %}
+                  placeholder="{{ extra.values }}">
+          {# Number #}
+          {% elif extra.type == 1 %}
+                <label for="extra-{{ shift.pk }}-{{ extra.pk }}">{{ extra.description }}</label>
+                <input class="form-control" type="number"
+                  {% if object.is_closed %} disabled{% endif %}
+                  name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}"
+                  min="{{ extra.minimum }}" max="{{ extra.maximum }}">
+          {# Checkbox on the left #}
+          {% elif extra.type == 2 %}
+                <div class="mt-3 mb-3" >
+                  <input class="zoom-x15" type="checkbox"
+                    {% if object.is_closed %} disabled{% endif %}
+                    name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}">
+                  &nbsp;
+                  <label for="extra-{{ shift.pk }}-{{ extra.pk }}">{{ extra.description }}</label>
+                </div>
+          {# Checkbox on the right #}
+          {% elif extra.type == 3 %}
+                <div class="mt-3 mb-3" >
+                  <label for="extra-{{ shift.pk }}-{{ extra.pk }}">{{ extra.description }}</label>
+                  &nbsp;
+                  <input class="zoom-x15" type="checkbox"
+                    {% if object.is_closed %} disabled{% endif %}
+                    name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}">
+                </div>
+          {# Select #}
+          {% elif extra.type == 4 %}
+                <label for="extra-{{ shift.pk }}-{{ extra.pk }}">{{ extra.description }}</label>
+                <select class="form-control"
+                  {% if object.is_closed %} disabled{% endif %}
+                  name="extra-{{ shift.pk }}-{{ extra.pk }}" id="extra-{{ shift.pk }}-{{ extra.pk }}">
+            {# Split Extra values #}
+            {% with extra.values|split_extra_values as values %}
+              {% for value in values %}
+                  <option value="{{ value.0 }}">{{ value.1 }}</option>
+              {% endfor %}
+            {% endwith %}
+                </select>
+          {% endif %}
+                </div>
+        {% endfor %}
+              </div>
+      {% endif %}
             </div>
     {% endfor %}
           </div>
@@ -209,6 +268,16 @@
           let is_present = $("#present-" + shift_id).prop("checked");
           let is_holiday = $("#holiday-" + shift_id).prop("checked");
           let permit = $("#permit-" + shift_id).val();
+          let obj_extra = null;
+    {% for extra in extras %}
+          obj_extra = $("#extra-" + shift_id + "-{{ extra.pk }}");
+        {% if extra.type == 2 or extra.type == 3 %}
+          let extra_{{ extra.pk }} = obj_extra.prop("checked");
+        {% else %}
+          let extra_{{ extra.pk }} = obj_extra.val();
+        {% endif %}
+          console.log({{ extra.pk }}, "{{ extra.description }}", extra_{{ extra.pk }});
+    {% endfor %}
           let update_status = false;
           console.log(shift_id, employee, date, is_present, is_holiday, permit);
           step_width += step_size_percent;
@@ -224,6 +293,9 @@
                 present: is_present,
                 holiday: is_holiday,
                 permit: permit,
+    {% for extra in extras %}
+                extra_{{ extra.pk }}: extra_{{ extra.pk }},
+    {% endfor %}
                 csrfmiddlewaretoken: '{{ csrf_token }}'
               },
               async: false,
