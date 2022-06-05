@@ -21,5 +21,6 @@
 from .employee import Employee, EmployeeAdmin                      # noqa: F401
 from .extra import Extra, ExtraAdmin                               # noqa: F401
 from .shift import Shift, ShiftAdmin                               # noqa: F401
+from .shift_extra import ShiftExtra, ShiftExtraAdmin               # noqa: F401
 from .team import Team, TeamAdmin                                  # noqa: F401
 from .week import Week, WeekAdmin                                  # noqa: F401
