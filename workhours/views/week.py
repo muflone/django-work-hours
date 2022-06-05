@@ -32,7 +32,7 @@ from workhours.constants import (DELAY_AFTER_SAVE_DAY,
                                  DELAY_BEFORE_SAVE_DAY,
                                  DELAY_BEFORE_SAVE_WEEK)
 from workhours.mixins import IsInTeamUserMixin, TeamMixin
-from workhours.models import Team, Shift, Week
+from workhours.models import Shift, ShiftExtra, Team, Week
 
 
 class WeekView(RequireLoginMixin,
@@ -80,33 +80,32 @@ class WeekView(RequireLoginMixin,
         # Get the days details
         days = []
         shifts_all_qs = Shift.objects.select_related('employee')
-        if context['extras']:
-            # If the team has extras enabled, prefetch the extras
-            shifts_all_qs = shifts_all_qs.prefetch_related('extras')
+        # Get the shifts extras
+        shifts_extras = ShiftExtra.objects.filter(
+            shift__week=self.object).select_related('shift', 'extra')
+        shifts_extras_values = {}
+        for shift_extra in shifts_extras:
+            if shift_extra.shift_id not in shifts_extras_values:
+                shifts_extras_values[shift_extra.shift_id] = {}
+            item = shifts_extras_values[shift_extra.shift_id]
+            item[shift_extra.extra.name] = shift_extra.value
+        # Process every day
         for day_number in range(7):
             day = (self.object.starting_date +
                    datetime.timedelta(days=day_number))
             shifts = []
             shifts_ids = []
-            shifts_extras = []
             for employee in employees:
                 shift, _ = shifts_all_qs.get_or_create(week=self.object,
                                                        employee=employee,
                                                        date=day)
 
-                if context['extras']:
-                    shift_extras = {item[0]: item[1]
-                                    for item
-                                    in shift.extras.values_list('extra__name',
-                                                                'value')}
-                else:
-                    shift_extras = None
                 shifts.append(shift)
                 shifts_ids.append(shift.pk)
-                shifts_extras.append(shift_extras)
-            days.append((day_number, day, shifts, shifts_ids, shifts_extras))
+            days.append((day_number, day, shifts, shifts_ids))
         context['days'] = days
         context['week_status'] = (pgettext_lazy('Week', 'Closed')
                                   if self.object.is_closed
                                   else pgettext_lazy('Week', 'Open'))
+        context['shifts_extras_values'] = shifts_extras_values
         return context
